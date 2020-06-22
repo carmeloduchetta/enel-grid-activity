@@ -1,6 +1,6 @@
-package com.enel.permitting.api.rest;
+package com.enel.permitting.controller;
 
-import com.enel.permitting.domain.RestErrorInfo;
+import com.enel.permitting.entity.RestErrorInfo;
 import com.enel.permitting.exception.DataFormatException;
 import com.enel.permitting.exception.ResourceNotFoundException;
 

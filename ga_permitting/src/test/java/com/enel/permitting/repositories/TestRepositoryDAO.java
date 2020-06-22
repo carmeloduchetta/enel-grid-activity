@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.enel.permitting.dao.jpa.FascicleRepository;
+import com.enel.permitting.repository.FascicleRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //@RunWith(SpringRunner.class)

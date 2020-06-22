@@ -9,6 +9,15 @@ spring.jmx:
 #    driverClassName: org.h2.Driver
 #    url: jdbc:h2:mem:bootexample;MODE=MySQL
 
+spring:
+  jpa:
+    database: ORACLE
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      proc.param_null_passing: true
+
 server:
   port: 8090
 
@@ -25,7 +34,7 @@ management:
 
 #default project info followed by actual injected pom-specified values.
 project:
-  name: ga_permitting
+  name: gapermitting
   version: 0.1
   description: boot-example default description
 info:
@@ -44,14 +53,6 @@ spring:
     console:
       enabled: true
 
-#spring.jpa:
-#    hibernate.ddl-auto: none
-
-hotel.service:
-  name: 'test profile:'
-  
 logging:
   file: boot_example.log
-  org.hibernate: INFO
-
  

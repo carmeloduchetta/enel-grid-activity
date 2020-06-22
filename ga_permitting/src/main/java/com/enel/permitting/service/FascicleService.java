@@ -1,7 +1,7 @@
 package com.enel.permitting.service;
 
-import com.enel.permitting.dao.jpa.FascicleRepository;
-import com.enel.permitting.domain.Fascicle;
+import com.enel.permitting.entity.Fascicle;
+import com.enel.permitting.repository.FascicleRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

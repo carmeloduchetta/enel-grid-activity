@@ -1,10 +1,10 @@
-package com.enel.permitting.api.rest;
+package com.enel.permitting.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
-import com.enel.permitting.domain.Fascicle;
+import com.enel.permitting.entity.Fascicle;
 import com.enel.permitting.exception.DataFormatException;
 import com.enel.permitting.service.FascicleService;
 

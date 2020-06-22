@@ -1,4 +1,4 @@
-package com.enel.permitting.api.rest.docs;
+package com.enel.permitting;
 
 import com.google.common.base.Predicates;
 
@@ -17,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@ComponentScan("com.enel.permitting.api.rest")
+@ComponentScan("com.enel.permitting.controller")
 public class SwaggerConfig {
 
     @Bean

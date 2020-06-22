@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableAutoConfiguration  // Sprint Boot Auto Configuration
 @ComponentScan(basePackages = "com.enel.permitting")
-@EnableJpaRepositories("com.enel.permitting.dao.jpa") // To segregate MongoDB and JPA repositories. Otherwise not needed.
+@EnableJpaRepositories("com.enel.permitting.repository") // To segregate MongoDB and JPA repositories. Otherwise not needed.
 public class GaPermittingApplication {
 
     private static final Class<GaPermittingApplication> applicationClass = GaPermittingApplication.class;
