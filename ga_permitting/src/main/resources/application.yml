@@ -16,7 +16,24 @@ spring:
     hibernate:
       ddl-auto: update
     properties:
-      proc.param_null_passing: true
+      hibernates:
+        proc.param_null_passing: true
+
+  datasource:
+    #platform: org.hibernate.dialect.Oracle12cDialect
+    platform: org.hibernate.dialect.Oracle10gDialect
+    url: jdbc:oracle:thin:@//RAUI1C.db.enel:1521/RAUI1C
+    username: wlspool_ardesia
+    password: aisedra
+    driverClassName: oracle.jdbc.OracleDriver
+
+#    MAREMT CREDENTIALS WLS
+#    username: wlspool_maremt or MAREMT
+#    password: tmeram
+
+#    ARDESIA CREDENTIALS
+#    username: wlspool_ardesia
+#    password: aisedra
 
 server:
   port: 8090
