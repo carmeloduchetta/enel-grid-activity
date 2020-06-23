@@ -22,7 +22,7 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TES
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GaPermittingApplication.class)
-@Sql(scripts = { "/test-car-data.sql" })
+//@Sql(scripts = { "/test-car-data.sql" })
 //@Sql(scripts = "/test-car-cleanup.sql", executionPhase = AFTER_TEST_METHOD)
 public class CarRepositoryIntegrationTest {
 
@@ -63,7 +63,7 @@ public class CarRepositoryIntegrationTest {
     	//carRepository.GET_TOTAL_CARS_BY_MODEL(CAR_BMW_MODEL_);
     	//carRepository.getTotalCarsByModelProcedureName(CAR_BMW_MODEL_);
     	//assertEquals(2,carRepository.getTotalCarsByModelEntiy(CAR_BMW_MODEL_).intValue());
-    	//assertEquals(2,carRepository.getTotalCarsByModelEntiy(CAR_BMW_MODEL_, countResult).intValue());
+    	assertEquals(2,carRepository.getTotalCarsByModelEntiy(CAR_BMW_MODEL_).intValue());
     	//assertEquals(2,carRepository.getTotalCarsByModelProcedureName(CAR_BMW_MODEL_));
     	//Long year = new Long(2001);
     	//carRepository.getNativeTotalCarsByModel(CAR_BMW_MODEL_);
