@@ -22,7 +22,7 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TES
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GaPermittingApplication.class)
-//@Sql(scripts = { "/test-car-data.sql" })
+@Sql(scripts = { "/test-car-data.sql" })
 //@Sql(scripts = "/test-car-cleanup.sql", executionPhase = AFTER_TEST_METHOD)
 public class CarRepositoryIntegrationTest {
 
@@ -35,8 +35,8 @@ public class CarRepositoryIntegrationTest {
     @Autowired
     private CarRepository carRepository;
 
-    //@Before
-    /*public void setUp() {
+    @Before
+    public void setUp() {
 
         Car car1 = new Car(CAR_BMW_MODEL_, 2000);
         Car car2 = new Car(CAR_BENZ_MODEL_, 2010);
@@ -44,7 +44,7 @@ public class CarRepositoryIntegrationTest {
         Car car4 = new Car(CAR_PORCHE_MODEL_, 2004);
 
         carRepository.saveAll(Arrays.asList(car1, car2, car3, car4));
-    }*/
+    }
 
     /*@After
     public void tearDown() {
@@ -73,25 +73,25 @@ public class CarRepositoryIntegrationTest {
     
     }
 
-    //@Test
+    @Test
     public void whenFindByModel_thenReturnsCorrectResult() {
 
         assertEquals(4, carRepository.findByModel(CAR_PORCHE_MODEL_).size());
     }
 
-    //@Test
+    @Test
     public void whenByYearLessThanEqual_thenReturnsCorrectResult() {
 
         assertEquals(8, carRepository.findByYearLessThanEqual(2018).size());
     }
 
-    //@Test
+    @Test
     public void whenByAgeGreaterThanEqual_thenReturnsCorrectResult() {
 
         assertEquals(4, carRepository.findByYearGreaterThanEqual(2018).size());
     }
 
-    //@Test
+    @Test
     public void whenByAgeBetween_thenReturnsCorrectResult() {
 
         assertEquals(11, carRepository.findByYearBetween(2000, 2020).size());

@@ -35,6 +35,11 @@ spring:
 #    username: wlspool_ardesia
 #    password: aisedra
 
+#    ATLANTE CREDENTIALS
+#    username: ATLANTE
+#    password: etnalta
+
+
 server:
   port: 8090
 

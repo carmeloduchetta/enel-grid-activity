@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 
 @Entity
-@Table(name = "fascicolo")
+//@Table(name = "FASCICOLO", schema = "WLSPOOL_ARDESIA")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Fascicle {

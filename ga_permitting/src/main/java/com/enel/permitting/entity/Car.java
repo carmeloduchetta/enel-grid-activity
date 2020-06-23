@@ -1,25 +1,18 @@
 package com.enel.permitting.entity;
 
-import java.time.ZonedDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
 import javax.persistence.FieldResult;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedStoredProcedureQueries;
-import javax.persistence.NamedStoredProcedureQuery;
-import javax.persistence.StoredProcedureParameter;
 import javax.persistence.SqlResultSetMapping;
-import javax.persistence.SqlResultSetMappings;
-import javax.persistence.EntityResult;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.NamedNativeQuery;
 
-import javax.persistence.ParameterMode;
-
 @Entity
+//@Table(name = "CAR", schema = "WLSPOOL_ARDESIA")
 @NamedNativeQuery(
 	    name = "FIND_CARS_AFTER_YEAR",
 	    query = "{ ? = call FIND_CARS_AFTER_YEAR( ? ) }",
@@ -30,13 +23,7 @@ import javax.persistence.ParameterMode;
 	    name = "cars",
 	    entities = {
 	        @EntityResult(
-	            entityClass = Car.class,
-	            fields = {
-	                @FieldResult(
-	                    name = "mioid",
-	                    column = "id"
-	                )
-	            }
+	            entityClass = Car.class
 	        )
 	    }
 	)
