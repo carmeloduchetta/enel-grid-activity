@@ -1,14 +1,14 @@
 package com.enel.permitting.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityResult;
-import javax.persistence.FieldResult;
 import javax.persistence.SqlResultSetMapping;
 
 import org.hibernate.annotations.NamedNativeQuery;
-
+//@Entity
 @NamedNativeQuery(
-	    name = "ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI",
-	    query = "{ ? = call ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI( ? ) }",
+	    name = "getDocuments",
+	    query = "{ ? = CALL ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI( ? ) }",
 	    callable = true,
 	    resultSetMapping = "documents"
 	)

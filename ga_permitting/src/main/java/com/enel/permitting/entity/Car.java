@@ -27,6 +27,7 @@ import org.hibernate.annotations.NamedNativeQuery;
 	        )
 	    }
 	)
+
 public class Car {
 	
     @Id

@@ -1,25 +1,20 @@
 package com.enel.permitting.repositories;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.ParameterMode;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
 
 import com.enel.permitting.GaPermittingApplication;
 import com.enel.permitting.entity.Car;
+import com.enel.permitting.entity.Document;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GaPermittingApplication.class)
@@ -52,7 +47,7 @@ public class StoredProcedureTest {
 				System.out.println("commentCount: "+commentCount);
 	}
 	
-	@Test
+	//@Test
 	public void testFunction() {
 		
 		List<Car> rawcars = entityManager
@@ -66,6 +61,36 @@ public class StoredProcedureTest {
 			
 		}
 				
+	}
+	
+	//@Test
+	public void testArdesiaiFunction() {
+		
+		List<Document> documents = entityManager
+				//.createNamedQuery("ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI")
+				.createNamedQuery("ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI")
+				.setParameter(1, 100928)
+				.getResultList();
+				     
+		for(Document document: documents) {
+
+			System.out.println("ID DOCUMENT: "+document.getIddocumento()+" - Model: "+document.getDsdocumento());
+			
+		}
+				
+	}
+	
+	@Test
+	public void testArdesiaFunctionAsProc() {
+		List<Object> documents = entityManager
+				//.createNativeQuery("{ ? = call ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI( ? ) }")
+				.createNativeQuery("SELECT ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI(?) FROM DUAL;")
+				.setParameter(1, 2011)
+				.getResultList();
+				 
+				//query.execute();
+				 
+				//List<Document> documents = (List<Document>) query.getOutputParameterValue(2);
 	}
  
  
