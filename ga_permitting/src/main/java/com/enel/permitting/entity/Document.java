@@ -1,40 +1,40 @@
 package com.enel.permitting.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityResult;
-import javax.persistence.SqlResultSetMapping;
+import java.io.Serializable;
 
-import org.hibernate.annotations.NamedNativeQuery;
-//@Entity
-@NamedNativeQuery(
-	    name = "getDocuments",
-	    query = "{ ? = CALL ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI( ? ) }",
-	    callable = true,
-	    resultSetMapping = "documents"
-	)
-	@SqlResultSetMapping(
-	    name = "documents",
-	    entities = {
-	        @EntityResult(
-	            entityClass = Document.class
-	        )
-	    }
-	)
 
-public class Document {
-
+public class Document implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String cddocumento;
-
+	private String dsdocumento;
+	private Integer iddocumento;
+	private String dtstampa;
+	private String idprofilopuma;
+	
+	public Document() {
+		
+	}
+	
+	public Document(String cddocumento,String dsdocumento,Integer iddocumento,String dtstampa,String idprofilopuma) {
+		this.cddocumento = cddocumento;
+		this.dsdocumento = dsdocumento;
+		this.iddocumento = iddocumento;
+		this.dtstampa = dtstampa;
+		this.idprofilopuma = idprofilopuma;
+	}
+	
 	public String getDsdocumento() {
 		return dsdocumento;
 	}
 	public void setDsdocumento(String dsdocumento) {
 		this.dsdocumento = dsdocumento;
 	}
-	public Long getIddocumento() {
+	public Integer getIddocumento() {
 		return iddocumento;
 	}
-	public void setIddocumento(Long iddocumento) {
+	public void setIddocumento(Integer iddocumento) {
 		this.iddocumento = iddocumento;
 	}
 	public String getDtstampa() {
@@ -49,11 +49,6 @@ public class Document {
 	public void setIdprofilopuma(String idprofilopuma) {
 		this.idprofilopuma = idprofilopuma;
 	}
-	private String dsdocumento;
-	private Long iddocumento;
-	private String dtstampa;
-	private String idprofilopuma;
-	
 	public String getCddocumento() {
 		return cddocumento;
 	}

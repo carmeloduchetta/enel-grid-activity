@@ -1,20 +1,25 @@
 package com.enel.permitting.repositories;
 
+import java.sql.CallableStatement;
+import java.sql.Types;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
+import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.enel.permitting.GaPermittingApplication;
-import com.enel.permitting.entity.Car;
+import com.enel.permitting.entity.CarResult;
 import com.enel.permitting.entity.Document;
+import oracle.jdbc.OracleTypes;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GaPermittingApplication.class)
@@ -28,7 +33,7 @@ public class StoredProcedureTest {
 	@Test
 	public void testGetTotalCarsProcedure() {
 		StoredProcedureQuery query = entityManager
-				.createStoredProcedureQuery("GET_TOTAL_CARS_BY_MODEL")
+				.createStoredProcedureQuery("ARDESIAI.GET_TOTAL_CARS_BY_MODEL")
 				.registerStoredProcedureParameter(
 				    1,
 				    String.class,
@@ -47,31 +52,31 @@ public class StoredProcedureTest {
 				System.out.println("commentCount: "+commentCount);
 	}
 	
-	//@Test
+	@Test
 	public void testFunction() {
 		
-		List<Car> rawcars = entityManager
+		List<CarResult> rawcars = entityManager
 				.createNamedQuery("FIND_CARS_AFTER_YEAR")
-				.setParameter(1, 2018)
+				.setParameter(1, 2010)
 				.getResultList();
 				     
-		for(Car car: rawcars) {
+		for(CarResult car: rawcars) {
 
-			System.out.println("ID CAR: "+car.getId()+" - Model: "+car.getModel()+" - Year: "+car.getYear());
+			System.out.println("ID CAR:  - Model: "+car.getModel()+" - Year: "+car.getYear());
 			
 		}
 				
 	}
 	
-	//@Test
+	@Test
 	public void testArdesiaiFunction() {
 		
 		List<Document> documents = entityManager
-				//.createNamedQuery("ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI")
-				.createNamedQuery("ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI")
+				.createNamedQuery("getDocuments")			
+				//.setParameter(1, null)
 				.setParameter(1, 100928)
 				.getResultList();
-				     
+		
 		for(Document document: documents) {
 
 			System.out.println("ID DOCUMENT: "+document.getIddocumento()+" - Model: "+document.getDsdocumento());
@@ -80,17 +85,23 @@ public class StoredProcedureTest {
 				
 	}
 	
-	@Test
+	//@Test
+	//@Transactional
 	public void testArdesiaFunctionAsProc() {
-		List<Object> documents = entityManager
-				//.createNativeQuery("{ ? = call ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI( ? ) }")
-				.createNativeQuery("SELECT ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI(?) FROM DUAL;")
-				.setParameter(1, 2011)
-				.getResultList();
-				 
-				//query.execute();
-				 
-				//List<Document> documents = (List<Document>) query.getOutputParameterValue(2);
+		Session session = entityManager.unwrap( Session.class );
+		 
+		session.doWork( 
+		    connection -> {
+		    try (CallableStatement function = connection
+		        .prepareCall(
+		            "{ ? = call ARDESIAI.PCK_GEST_FASCREAL.GET_LISTA_DOCUMENTI( ? ) }" )) {
+		        function.registerOutParameter( 1, OracleTypes.CURSOR );
+		        function.setInt( 2, 100928 );
+		        function.execute();
+		        //return function.getObject(1);
+		    }
+		} );
+		
 	}
  
  
