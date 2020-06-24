@@ -1,4 +1,4 @@
-package com.enel.ga_permitting;
+package com.enel.gapermitting;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

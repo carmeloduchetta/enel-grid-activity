@@ -22,6 +22,5 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 
     @Procedure(name = "getTotalCarsbyModelEntity")
     Integer getTotalCarsByModelEntiy(@Param("model_in") String model);
-       
 
 }

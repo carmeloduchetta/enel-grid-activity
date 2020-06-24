@@ -55,21 +55,7 @@ public class CarRepositoryIntegrationTest {
     @Test 
     public void whenFindByModel_getTotalCarsByModel() {
     	
-    	//Integer resultCount;
-    	    	
-    	//assertEquals(2,carRepository.getTotalCarsByModel(CAR_BMW_MODEL_));
-    	//assertEquals(2,carRepository.getTotalCarsByModelProcedureName(CAR_BMW_MODEL_));
-    	
-    	//carRepository.GET_TOTAL_CARS_BY_MODEL(CAR_BMW_MODEL_);
-    	//carRepository.getTotalCarsByModelProcedureName(CAR_BMW_MODEL_);
-    	//assertEquals(2,carRepository.getTotalCarsByModelEntiy(CAR_BMW_MODEL_).intValue());
     	assertEquals(2,carRepository.getTotalCarsByModelEntiy(CAR_BMW_MODEL_).intValue());
-    	//assertEquals(2,carRepository.getTotalCarsByModelProcedureName(CAR_BMW_MODEL_));
-    	//Long year = new Long(2001);
-    	//carRepository.getNativeTotalCarsByModel(CAR_BMW_MODEL_);
-    	//assertEquals(2,carRepository.findCarsAfterYear(2011).size());
-    	
-    	//assertEquals(13,carRepository.getAllCars().size());
     
     }
 
@@ -96,7 +82,5 @@ public class CarRepositoryIntegrationTest {
 
         assertEquals(11, carRepository.findByYearBetween(2000, 2020).size());
     }
-
-
 
 }

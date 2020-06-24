@@ -54,7 +54,7 @@ public class StoredProcedureTest {
 	
 	@Test
 	public void testFunction() {
-		
+	    
 		List<CarResult> rawcars = entityManager
 				.createNamedQuery("FIND_CARS_AFTER_YEAR")
 				.setParameter(1, 2010)
@@ -62,10 +62,10 @@ public class StoredProcedureTest {
 				     
 		for(CarResult car: rawcars) {
 
-			System.out.println("ID CAR:  - Model: "+car.getModel()+" - Year: "+car.getYear());
+			System.out.println("ID CAR:"+ car.getId() +"- Model: "+car.getModel()+" - Year: "+car.getYear());
 			
 		}
-				
+		
 	}
 	
 	@Test
