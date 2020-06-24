@@ -1,6 +1,6 @@
 package com.enel.permitting.repository;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.transaction.Transactional;
 
@@ -30,17 +30,24 @@ public interface FascicleRepository extends JpaRepository<Fascicle, Long> {
     		@Param("an_idfascicolo")       Integer idfascicolo,
     		@Param("an_identeprivate")     Integer identeprivate,
     		@Param("an_iddestinatario")    Integer iddestinatario,
+    		
     		@Param("as_cdfascicolo")       String cdfascicolo,
     		@Param("as_dsfascicolo")       String dsfascicolo,
-    		@Param("as_cdite")             String cdite,
+    		@Param("as_cditer")            String cditer,
     		@Param("as_utente")            String utente,
+    		
     		@Param("an_idinddestinat")     Integer idinddestinat,
     		@Param("an_idunitaresp")       Integer idunitaresp,
+    		
     		@Param("as_cdtiporichiesta")   String cdtiporichiesta,
     		@Param("as_cdtiporisposta")    String cdtiporisposta,
+    		
     		@Param("an_ggterminilegge")    Integer ggterminilegge,
+    		
     		@Param("as_swterminilegge")    String swterminilegge,
+    		
     		@Param("an_ggtempomedio")      Integer ggtempomedio,
+    		
     		@Param("as_cdstatoiteriniz")   String cdstatoiteriniz,
     		@Param("as_cdstatoiterfine")   String cdstatoiterfine,
 
@@ -51,21 +58,40 @@ public interface FascicleRepository extends JpaRepository<Fascicle, Long> {
     		@Param("as_forzastato")        String forzastato,
     		@Param("as_idpumaistanza")     String idpumaistanza,
     		@Param("as_protpumaistanza")   String protpumaistanza,
+    		
     		@Param("ad_dataBreviManuIst")  Date dataBreviManuIst,
-
     		@Param("ad_dtinizioattesa")    Date dtinizioattesa,
+    		
     		@Param("as_flagavanzamento")   String flagavanzamento,
+    		
     		@Param("ad_dtrisposta")        Date dtrisposta,
+    		
     		@Param("as_cdrispostaottenuta") String cdrispostaottenuta,
     		@Param("as_condizioni")        String condizioni,
     		@Param("as_cdpumarisposta")    String cdpumarisposta,
     		@Param("an_idprofilopuma")     String idprofilopuma,
+    		
     		@Param("ad_dataBreviManuRisp") Date dataBreviManuRisp,
-
     		@Param("ad_dtfascfine")        Date dtfascfine,
+    		
     		@Param("as_cdesitofasc")       String cdesitofasc,
     		@Param("as_swprescrizione")    String swprescrizione,
     		@Param("as_noteprescrizione")  String noteprescrizione
     );
- 
+    
+    @Procedure(name = "salvaFascicoloRealeWithMiniParams")
+    FascicleResult saveFascicleWithMiniParams(
+    		@Param("an_idfascicolo")       Integer idfascicolo,
+    		@Param("an_idente")     Integer identeprivate,   		
+    		@Param("as_cdfascicolo")       String cdfascicolo,
+    		@Param("as_dsfascicolo")       String dsfascicolo,
+    		@Param("as_cditer")            String cditer,
+    		@Param("as_utente")            String utente,
+    		@Param("an_idunitaresp")       Integer idunitaresp,    		
+    		@Param("as_cdtiporichiesta")   String cdtiporichiesta,
+    		@Param("as_cdtiporisposta")    String cdtiporisposta,    		
+    		@Param("an_ggterminilegge")    Integer ggterminilegge,    		
+    		@Param("as_swterminilegge")    String swterminilegge
+    );
+    
 }

@@ -1,25 +1,20 @@
 package com.enel.permitting.entity;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import javax.persistence.Column;
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedStoredProcedureQueries;
 import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.ParameterMode;
-import javax.persistence.SqlResultSetMapping;
-import javax.persistence.SqlResultSetMappings;
 import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.enel.permitting.beans.FascicleResult;
 
 /*
  * a simple domain entity doubling as a DTO
@@ -55,7 +50,7 @@ import com.enel.permitting.beans.FascicleResult;
 				@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "an_iddestinatario"),
 				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_cdfascicolo"),
 				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_dsfascicolo"),
-				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_cdite"),
+				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_cditer"),
 				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_utente"),
 				@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "an_idinddestinat"),
 				@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "an_idunitaresp"),
@@ -101,8 +96,36 @@ import com.enel.permitting.beans.FascicleResult;
 				@StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "as_major_msg"),
 				@StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "as_minor_msg")			
 
-		}/*,
+		}),/*,
 		resultSetMappings = {"getFascicleResult"}*/
+				@NamedStoredProcedureQuery(
+						name = "salvaFascicoloRealeWithMiniParams", 
+						procedureName = "ARDESIAI.PCK_GEST_FASCREAL.SALVA_FASCICOLO_REALE",
+						parameters = { 
+								@StoredProcedureParameter(mode = ParameterMode.INOUT, type = Integer.class, name = "an_idfascicolo"),
+								@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "an_idente"),								
+								@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_cdfascicolo"),
+								@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_dsfascicolo"),
+								@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_cditer"),
+								@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_utente"),
+								@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "an_idunitaresp"),
+								@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_cdtiporichiesta"),
+								@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_cdtiporisposta"),
+								@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "an_ggterminilegge"),
+								@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_swterminilegge"),
+																
+								@StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "as_cdstatofascicolo"),
+								@StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "as_cdstatosuccessivo"),
+								@StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "as_cdstatoprecedente"),
+								@StoredProcedureParameter(mode = ParameterMode.OUT, type = Date.class, name = "ad_dttermineprevista"),
+								@StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "as_listastati"),
+								@StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "as_repaintgraph"),
+								@StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "an_major_code"),
+								@StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "an_minor_code"),
+								@StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "as_major_msg"),
+								@StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "as_minor_msg")			
+
+						}
 	)
 })
 

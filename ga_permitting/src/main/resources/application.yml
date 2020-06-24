@@ -16,7 +16,7 @@ spring:
     hibernate:
       ddl-auto: update
     properties:
-      hibernates:
+      hibernate:
         proc.param_null_passing: true
 
   datasource:
