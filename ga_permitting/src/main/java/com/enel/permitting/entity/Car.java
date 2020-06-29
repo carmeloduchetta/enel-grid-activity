@@ -17,6 +17,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
 
+import com.enel.permitting.beans.CarResult;
+import com.enel.permitting.beans.Document;
+
 @Entity
 //@Table(name = "CAR", schema = "WLSPOOL_ARDESIA")
 @Table(name = "CAR", schema = "ARDESIAI")

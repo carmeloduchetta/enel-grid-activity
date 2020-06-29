@@ -1,12 +1,16 @@
 package com.enel.permitting.repositories;
 
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
-import javax.transaction.Transactional;
+import javax.sql.DataSource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +19,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.enel.permitting.GaPermittingApplication;
-import com.enel.permitting.beans.FascicleResult;
 import com.enel.permitting.repository.FascicleRepository;
 
 @RunWith(SpringRunner.class)
@@ -25,26 +28,48 @@ public class FascicleRepositoryIntegrationTest {
 	@PersistenceContext
     private EntityManager entityManager;
 	
+	@Autowired
+	DataSource datasource;
+	
     @Autowired
     private FascicleRepository fascicleRepository;
     
-    //@Test 
+    //@Test
+    public void checkRegisterParameterOnDB() {
+		try {
+			Connection conn = datasource.getConnection();
+	    	DatabaseMetaData dbmd = conn.getMetaData();
+	    	if (dbmd.supportsNamedParameters() == true)
+	    	{
+	    		System.out.println("NAMED PARAMETERS FOR CALLABLE"
+	    	                        + "STATEMENTS IS SUPPORTED");
+	    	}
+	    	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    @Test 
     public void saveFascicleByProcedureTestByRepository() {
     	
-	   FascicleResult result = fascicleRepository.saveFascicle(
-	    	        null, //.............idfascicolo, 
-	    	        1000640, //.............identeprivate, 
-	    	        null, //.............iddestinatario, 
-	    	        "test procedure 2", //.............cdfascicolo, 
+	   //HashMap<String,Object> result 
+			   
+    	HashMap<String,Object> result = fascicleRepository.saveFascicle(
+	    	        null,    //.............idfascicolo, 
+	    	        1000012, //.............identeprivate, mandatory
+	    	        null,    //.............iddestinatario, 
+	    	        "test procedure 6",                  //.............cdfascicolo, mandatory
 	    	        "concessione su strade consorziali", //.............dsfascicolo, 
-	    	        "160920", //.............cditer, 
-	    	        "A325137", //.............utente, 
-	    	        null, //.............idinddestinat, 
-	    	        1000491456, //.............idunitaresp, 
-	    	        "AUTOR", //.............cdtiporichiesta, 
-	    	        "RI", //.............cdtiporisposta, 
-	    	        90, //.............ggterminilegge, 
-	    	        "N", //.............swterminilegge, 
+	    	        "1925484",  //.............cditer, mandatory
+	    	        "A325137",  //.............utente, mandatory
+	    	        null,       //.............idinddestinat, 
+	    	        1000491080, //.............idunitaresp, mandatory
+	    	        "AUTOR",    //.............cdtiporichiesta, mandatory
+	    	        "RI", //.............cdtiporisposta, mandatory
+	    	        90,   //.............ggterminilegge, optional check with Spain and Italy
+	    	        "N",  //.............swterminilegge, optional check with Spain and Italy
 	    	        null, //.............ggtempomedio, 
 	    	        null, //.............cdstatoiteriniz, 
 	    	        null, //.............cdstatoiterfine, 
@@ -71,69 +96,9 @@ public class FascicleRepositoryIntegrationTest {
     	    
     }
 
-    @Test
-    public void saveFascicleByProcedureTestWithMiniParams() {
-    	
- 	   fascicleRepository.saveFascicleWithMiniParams(
- 			   		null,
- 			   		1000012, //.............identeprivate, 
- 	    	        "test procedure 2", //.............cdfascicolo, 
- 	    	        "concessione su strade consorziali", //.............dsfascicolo, 
- 	    	        "1925484", //.............cditer, 
- 	    	        "A325137", //.............utente, 
- 	    	        1000491080, //.............idunitaresp, 
- 	    	        "AUTOR", //.............cdtiporichiesta, 
- 	    	        "RI", //.............cdtiporisposta, 
- 	    	        90, //.............ggterminilegge, 
- 	    	        "N" //.............swterminilegge, 
- 	    	);
-     	    
-     }
-
-    /**
-     * 
-     :AN_IDENTE,
-:AN_IDDESTINATARIO,
-:AS_CDFASCICOLO,
-:AS_DSFASCICOLO,
-:AS_CDITER,
-:AS_UTENTE,
-:AN_IDINDDESTINAT,
-:AN_IDUNITARESP,
-:AS_CDTIPORICHIESTA,
-:AS_CDTIPORISPOSTA,
-:AN_GGTERMINILEGGE,
-:AS_SWTERMINILEGGE,
-:AN_GGTEMPOMEDIO,
-:AS_CDSTATOITERINIZ,
-:AS_CDSTATOITERFINE,
-:AD_DTFIRMA,
-:AD_DTSPEDIZIONE,
-:AD_DTRICEVUTARITORNO,
-:AS_FORZASTATO,
-:AS_IDPUMAISTANZA,
-:AS_PROTPUMAISTANZA,
-:AD_DATABREVIMANUIST,
-:AD_DTINIZIOATTESA,
-:AS_FLAGAVANZAMENTO,
-:AD_DTRISPOSTA,
-:AS_CDRISPOSTAOTTENUTA,
-:AS_CONDIZIONI,
-:AS_CDPUMARISPOSTA,
-:AN_IDPROFILOPUMA,
-:AD_DATABREVIMANURISP,
-:AD_DTFASCFINE,
-:AS_CDESITOFASC,
-:AS_SWPRESCRIZIONE,
-:AS_NOTEPRESCRIZIONE,
-     */
     
-    
-    //@Test 
-    //@Transactional
+    @Test 
     public void saveFascicleByProcedureTestByEM() {
-    	
-    	//entityManager.getTransaction().begin();
     	
     	StoredProcedureQuery query = entityManager
 				.createStoredProcedureQuery("ARDESIAI.PCK_GEST_FASCREAL.SALVA_FASCICOLO_REALE")
@@ -370,8 +335,8 @@ public class FascicleRepositoryIntegrationTest {
 				)
 
 				.setParameter(2, 1000012)
-				.setParameter(4, "test procedure")
-				.setParameter(5, "concessione su strade consorziali")
+				.setParameter(4, "test procedure 7")
+				.setParameter(5, "concessione su strade consorziali EM")
 				.setParameter(6, "1925484")
 				.setParameter(7, "A325137")
 				.setParameter(9, 1000491080)

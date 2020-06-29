@@ -1,8 +1,8 @@
 package com.enel.permitting.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import com.enel.permitting.entity.CarResult;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -17,9 +17,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_NULL)
-public class FascicleResult {
+public class FascicleResult implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	//OUT
+	private Integer an_idfascicolo;
 	private String as_cdstatofascicolo;
 	private String as_cdstatosuccessivo;
 	private String as_cdstatoprecedente;

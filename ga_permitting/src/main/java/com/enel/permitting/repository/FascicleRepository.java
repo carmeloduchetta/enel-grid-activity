@@ -1,6 +1,7 @@
 package com.enel.permitting.repository;
 
 import java.sql.Date;
+import java.util.HashMap;
 
 import javax.transaction.Transactional;
 
@@ -26,9 +27,9 @@ public interface FascicleRepository extends JpaRepository<Fascicle, Long> {
     Page findAll(Pageable pageable);
 
     @Procedure(name = "salvaFascicoloReale")
-    FascicleResult saveFascicle(
+    HashMap<String,Object> saveFascicle(
     		@Param("an_idfascicolo")       Integer idfascicolo,
-    		@Param("an_identeprivate")     Integer identeprivate,
+    		@Param("an_idente")            Integer idente,
     		@Param("an_iddestinatario")    Integer iddestinatario,
     		
     		@Param("as_cdfascicolo")       String cdfascicolo,
@@ -59,7 +60,7 @@ public interface FascicleRepository extends JpaRepository<Fascicle, Long> {
     		@Param("as_idpumaistanza")     String idpumaistanza,
     		@Param("as_protpumaistanza")   String protpumaistanza,
     		
-    		@Param("ad_dataBreviManuIst")  Date dataBreviManuIst,
+    		@Param("ad_databrevimanuist")  Date dataBreviManuIst,
     		@Param("ad_dtinizioattesa")    Date dtinizioattesa,
     		
     		@Param("as_flagavanzamento")   String flagavanzamento,
@@ -71,27 +72,12 @@ public interface FascicleRepository extends JpaRepository<Fascicle, Long> {
     		@Param("as_cdpumarisposta")    String cdpumarisposta,
     		@Param("an_idprofilopuma")     String idprofilopuma,
     		
-    		@Param("ad_dataBreviManuRisp") Date dataBreviManuRisp,
+    		@Param("ad_databrevimanurisp") Date dataBreviManuRisp,
     		@Param("ad_dtfascfine")        Date dtfascfine,
     		
     		@Param("as_cdesitofasc")       String cdesitofasc,
     		@Param("as_swprescrizione")    String swprescrizione,
     		@Param("as_noteprescrizione")  String noteprescrizione
-    );
-    
-    @Procedure(name = "salvaFascicoloRealeWithMiniParams")
-    FascicleResult saveFascicleWithMiniParams(
-    		@Param("an_idfascicolo")       Integer idfascicolo,
-    		@Param("an_idente")     Integer identeprivate,   		
-    		@Param("as_cdfascicolo")       String cdfascicolo,
-    		@Param("as_dsfascicolo")       String dsfascicolo,
-    		@Param("as_cditer")            String cditer,
-    		@Param("as_utente")            String utente,
-    		@Param("an_idunitaresp")       Integer idunitaresp,    		
-    		@Param("as_cdtiporichiesta")   String cdtiporichiesta,
-    		@Param("as_cdtiporisposta")    String cdtiporisposta,    		
-    		@Param("an_ggterminilegge")    Integer ggterminilegge,    		
-    		@Param("as_swterminilegge")    String swterminilegge
     );
     
 }

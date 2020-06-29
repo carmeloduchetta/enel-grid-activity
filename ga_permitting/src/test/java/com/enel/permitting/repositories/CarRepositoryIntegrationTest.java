@@ -35,7 +35,7 @@ public class CarRepositoryIntegrationTest {
     @Autowired
     private CarRepository carRepository;
 
-    @Before
+    /*@Before
     public void setUp() {
 
         Car car1 = new Car(CAR_BMW_MODEL_, 2000);
@@ -46,7 +46,7 @@ public class CarRepositoryIntegrationTest {
         carRepository.saveAll(Arrays.asList(car1, car2, car3, car4));
     }
 
-    /*@After
+    @After
     public void tearDown() {
 
         carRepository.deleteAll();
@@ -55,7 +55,7 @@ public class CarRepositoryIntegrationTest {
     @Test 
     public void whenFindByModel_getTotalCarsByModel() {
     	
-    	assertEquals(2,carRepository.getTotalCarsByModelEntiy(CAR_BMW_MODEL_).intValue());
+    	assertEquals(4,carRepository.getTotalCarsByModelEntiy(CAR_BMW_MODEL_).intValue());
     
     }
 

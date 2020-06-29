@@ -1,4 +1,4 @@
-package com.enel.permitting.entity;
+package com.enel.permitting.beans;
 
 import java.io.Serializable;
 

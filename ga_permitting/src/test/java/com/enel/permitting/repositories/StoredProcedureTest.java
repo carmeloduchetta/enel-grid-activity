@@ -17,8 +17,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.enel.permitting.GaPermittingApplication;
-import com.enel.permitting.entity.CarResult;
-import com.enel.permitting.entity.Document;
+import com.enel.permitting.beans.CarResult;
+import com.enel.permitting.beans.Document;
+
 import oracle.jdbc.OracleTypes;
 
 @RunWith(SpringRunner.class)
