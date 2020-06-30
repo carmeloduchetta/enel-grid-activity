@@ -8,12 +8,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
 @Getter
-@Builder
+//@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_NULL)
@@ -26,6 +27,9 @@ public class FascicleResult implements Serializable {
 	private String as_cdstatofascicolo;
 	private String as_cdstatosuccessivo;
 	private String as_cdstatoprecedente;
+	
+	//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date ad_dttermineprevista;
 	private String as_listastati;
 	private String as_repaintgraph;

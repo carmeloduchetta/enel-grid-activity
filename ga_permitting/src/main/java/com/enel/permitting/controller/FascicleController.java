@@ -1,20 +1,30 @@
 package com.enel.permitting.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.enel.permitting.beans.FascicleResult;
 import com.enel.permitting.entity.Fascicle;
 import com.enel.permitting.exception.DataFormatException;
 import com.enel.permitting.service.FascicleService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 /*
  * Demonstrates how to set up RESTful API endpoints using Spring MVC
@@ -25,22 +35,30 @@ import javax.servlet.http.HttpServletResponse;
 @Api(tags = {"Fascicles"})
 public class FascicleController extends AbstractRestHandler {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(FascicleController.class);
+
     @Autowired
     private FascicleService fascicleService;
-
+    
     @RequestMapping(value = "",
-            method = RequestMethod.POST,
-            consumes = {"application/json", "application/xml"},
-            produces = {"application/json", "application/xml"})
+    method = RequestMethod.POST,
+    consumes = {"application/json"},
+    produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Create a Fascicle resource.", notes = "Returns the URL of the new resource in the Location header.")
-    public void createFascicle(@RequestBody Fascicle fascicle,
-                                 HttpServletRequest request, HttpServletResponse response) {
-        Fascicle createdFascicolo = this.fascicleService.createFascicolo(fascicle);
-        response.setHeader("Location", request.getRequestURL().append("/").append(createdFascicolo.getId()).toString());
+    public FascicleResult createFascicle(@RequestBody Fascicle fascicle, //) {
+                         HttpServletRequest request, HttpServletResponse response) {
+    	
+    	
+    	FascicleResult createdFascicle = fascicleService.createFascicle(fascicle);
+    	if(createdFascicle.getAn_idfascicolo() > 0)
+    		response.setHeader("Location", request.getRequestURL().append("/").append(createdFascicle.getAn_idfascicolo()).toString());
+    	
+    	return createdFascicle;
     }
+    
 
-    @RequestMapping(value = "",
+    /*@RequestMapping(value = "",
             method = RequestMethod.GET,
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
@@ -53,7 +71,7 @@ public class FascicleController extends AbstractRestHandler {
                                       @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
                                       HttpServletRequest request, HttpServletResponse response) {
         return this.fascicleService.getAllFascicoli(page, size);
-    }
+    }*/
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.GET,
@@ -63,7 +81,7 @@ public class FascicleController extends AbstractRestHandler {
     public
     @ResponseBody
     Fascicle getFascicolo(@ApiParam(value = "The ID of the fascicle.", required = true)
-                             @PathVariable("id") Long id,
+                             @PathVariable("id") Integer id,
                              HttpServletRequest request, HttpServletResponse response) throws Exception {
     	Fascicle fascicolo = this.fascicleService.getFascicolo(id);
         checkResourceFound(fascicolo);
@@ -71,7 +89,7 @@ public class FascicleController extends AbstractRestHandler {
         return fascicolo;
     }
 
-    @RequestMapping(value = "/{id}",
+    /*@RequestMapping(value = "/{id}",
             method = RequestMethod.PUT,
             consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
@@ -81,7 +99,7 @@ public class FascicleController extends AbstractRestHandler {
                                  @PathVariable("id") Long id, @RequestBody Fascicle fascicolo,
                                  HttpServletRequest request, HttpServletResponse response) {
         checkResourceFound(this.fascicleService.getFascicolo(id));
-        if (id != fascicolo.getId()) throw new DataFormatException("ID doesn't match!");
+        if (id != fascicolo.getIdfascicolo()) throw new DataFormatException("ID doesn't match!");
         this.fascicleService.updateFascicolo(fascicolo);
     }
 
@@ -96,5 +114,5 @@ public class FascicleController extends AbstractRestHandler {
                                  HttpServletResponse response) {
         checkResourceFound(this.fascicleService.getFascicolo(id));
         this.fascicleService.deleteFascicolo(id);
-    }
+    }*/
 }

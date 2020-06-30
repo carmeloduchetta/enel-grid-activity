@@ -1,6 +1,8 @@
 package com.enel.permitting.repository;
 
-import java.sql.Date;
+import java.time.LocalDate;
+//import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.transaction.Transactional;
@@ -12,7 +14,6 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.enel.permitting.beans.FascicleResult;
 import com.enel.permitting.entity.Fascicle;
 
 /**
@@ -21,9 +22,9 @@ import com.enel.permitting.entity.Fascicle;
 
 @Repository
 @Transactional
-public interface FascicleRepository extends JpaRepository<Fascicle, Long> {	
+public interface FascicleRepository extends JpaRepository<Fascicle, Integer> {	
     
-    Fascicle findFascicoloByCity(String city);
+    Fascicle findFascicoloByCditer(String cditer);
     Page findAll(Pageable pageable);
 
     @Procedure(name = "salvaFascicoloReale")

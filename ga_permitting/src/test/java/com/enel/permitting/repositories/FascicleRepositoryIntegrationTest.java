@@ -72,7 +72,7 @@ public class FascicleRepositoryIntegrationTest {
 	    	        "N",  //.............swterminilegge, optional check with Spain and Italy
 	    	        null, //.............ggtempomedio, 
 	    	        null, //.............cdstatoiteriniz, 
-	    	        null, //.............cdstatoiterfine, 
+	    	        null, //.............cdstatoiterfine,     	        
 	    	        null, //.............dtfirma, 
 	    	        null, //.............dtspedizione, 
 	    	        null, //.............dtricevutaritorno, 

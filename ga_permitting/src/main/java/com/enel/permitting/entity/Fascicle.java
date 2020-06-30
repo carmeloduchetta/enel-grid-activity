@@ -1,26 +1,27 @@
 package com.enel.permitting.entity;
 
 
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedStoredProcedureQueries;
 import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.ParameterMode;
-import javax.persistence.SqlResultSetMapping;
-import javax.persistence.SqlResultSetMappings;
 import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
-import com.enel.permitting.beans.FascicleResult;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /*
  * a simple domain entity doubling as a DTO
@@ -115,122 +116,138 @@ import com.enel.permitting.beans.FascicleResult;
 
 @Entity
 @Table(name = "FASCICLE", schema = "ARDESIAI")
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(Include.NON_NULL)
 public class Fascicle {
 	
 		@Id
 	    @GeneratedValue()
-	    private long id;
-
-	    @Column(nullable = false)
-	    private String name;
-
-	    @Column()
-	    private String description;
-
-	    @Column()
-	    String city;
-
-	    @Column()
-	    private int rating;
+		private int idfascicolo;
 	    
-	    private Integer an_major_code;
-	    private Integer an_minor_code;
-	    private String as_major_msg;
-	    private String as_minor_msg;
+	    @Column()
+		private int idente;
 	    
-	    public Fascicle() {
-	    }
+	    @Column()
+		private int iddestinatario;
+	    
+	    @Column()
+		private String cdfascicolo;
+	    
+	    @Column()
+		private String dsfascicolo;
+	    
+	    @Column()
+		private String cditer;
+	    
+	    @Column()
+		private String userins;
+	    
+	    @Column()
+		private String usermod;
+	    
+	    @Column()
+		private int idinddestinat;
+		
+	    @Column()
+	    private int idunitaresp;
+		
+	    @Column()
+	    private String cdtiporichiesta;
+		
+	    @Column()
+	    private String cdtiporisposta;
+		
+	    @Column()
+	    private int ggterminilegge;
+		
+	    @Column()
+	    private String swterminilegge;
+		
+	    @Column()
+	    private int ggtempomedio;
+		
+	    @Column()
+	    private String cdstatoiteriniz;
+		
+	    @Column()
+	    private String cdstatoiterfine;
+		 
+	    @Column()
+	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
+		private Date dtfirma;
+		
+	    @Column()
+	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
+	    private java.sql.Date dtspedizione;
+		
+	    @Column()
+	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
+	    private Date dtricevutaritorno;
+		
+		//private String forzastato; 
+		
+	    @Column()
+	    private String idpumaistanza;
+		
+	    @Column()
+	    private String protpumaistanza;
+	    
+	    @Column()
+	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
+		private Date dtbrevimanuist;        //dataBreviManuIst;
 
-	    public Fascicle(String name, String description, int rating) {
-	        this.name = name;
-	        this.description = description;
-	        this.rating = rating;
-	    }
-
-	    public long getId() {
-	        return this.id;
-	    }
-
-	    // for tests ONLY
-	    public void setId(long id) {
-	        this.id = id;
-	    }
-
-	    public String getName() {
-	        return name;
-	    }
-
-	    public void setName(String name) {
-	        this.name = name;
-	    }
-
-	    public String getDescription() {
-	        return description;
-	    }
-
-	    public void setDescription(String description) {
-	        this.description = description;
-	    }
-
-	    public int getRating() {
-	        return rating;
-	    }
-
-	    public void setRating(int rating) {
-	        this.rating = rating;
-	    }
-
-	    public String getCity() {
-	        return city;
-	    }
-
-	    public void setCity(String city) {
-	        this.city = city;
-	    }
-
+	    @Column()
+	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
+		private Date dtinizioattesa;
+		//private String flagavanzamento; 
+		
+	    @Column()
+	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
+	    private Date dtrisposta;
+		
+	    @Column()
+	    private String cdrispostaottenuta;
+		//private String condizioni;
+		
+	    @Column()
+	    private String cdpumarisposta;
+		
+	    @Column()
+	    private String idprofilopuma;
+		
+	    @Column()
+	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
+		private Date dtbrevimanurisp;       //dataBreviManuRisp;
+		
+	    @Column()
+	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
+	    private Date dtfascfine;
+		
+	    @Column()
+	    private String cdesitofasc;
+		
+	    @Column()
+	    private String swprescrizione;
+		
+	    @Column()
+	    private String noteprescrizione;
+		
+	    @Column()
+		private String cdstatofascicolo;
+		
+		
 	    @Override
 	    public String toString() {
 	        return "Fascicle {" +
-	                "id=" + id +
-	                ", name='" + name + '\'' +
-	                ", description='" + description + '\'' +
-	                ", city='" + city + '\'' +
-	                ", rating=" + rating +
+	                "idfascicolo=" + idfascicolo +
+	                ", cditer='" + cditer + '\'' +
+	                ", description='" + dsfascicolo + '\'' +
+	                ", risposta='" + dtrisposta + '\'' +
+	                ", termini legge=" + ggterminilegge +
 	                '}';
 	    }
-
-		public Integer getAn_major_code() {
-			return an_major_code;
-		}
-
-		public void setAn_major_code(Integer an_major_code) {
-			this.an_major_code = an_major_code;
-		}
-
-		public Integer getAn_minor_code() {
-			return an_minor_code;
-		}
-
-		public void setAn_minor_code(Integer an_minor_code) {
-			this.an_minor_code = an_minor_code;
-		}
-
-		public String getAs_major_msg() {
-			return as_major_msg;
-		}
-
-		public void setAs_major_msg(String as_major_msg) {
-			this.as_major_msg = as_major_msg;
-		}
-
-		public String getAs_minor_msg() {
-			return as_minor_msg;
-		}
-
-		public void setAs_minor_msg(String as_minor_msg) {
-			this.as_minor_msg = as_minor_msg;
-		}
 
 }
