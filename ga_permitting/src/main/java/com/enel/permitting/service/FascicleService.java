@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.enel.permitting.beans.FascicleResult;
-import com.enel.permitting.entity.Fascicle;
+import com.enel.permitting.model.Fascicle;
 import com.enel.permitting.repository.FascicleRepository;
 import com.enel.permitting.util.JSONHelper;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,9 +42,9 @@ public class FascicleService {
         	LOGGER.info(JSONHelper.toJSONwithPrettyPrint(fascicle));
         	  
     		HashMap<String,Object> mapResult = fascicoloRepository.saveFascicle(
-    			fascicle.getIdfascicolo() == 0 ? null : fascicle.getIdfascicolo(),fascicle.getIdente() == 0 ? null : fascicle.getIdente(), fascicle.getIddestinatario() == 0 ? null : fascicle.getIddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
-    			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == 0 ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == 0 ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),
-    			fascicle.getCdtiporisposta(),fascicle.getGgterminilegge() == 0 ? null : fascicle.getGgterminilegge(),fascicle.getSwterminilegge(), fascicle.getGgtempomedio() == 0 ? null : fascicle.getGgtempomedio(),fascicle.getCdstatoiteriniz(),
+    			fascicle.getIdfascicolo() == null ? null : fascicle.getIdfascicolo(),fascicle.getIdente() == null ? null : fascicle.getIdente(), fascicle.getIddestinatario() == null ? null : fascicle.getIddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
+    			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == null ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == null ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),
+    			fascicle.getCdtiporisposta(),fascicle.getGgterminilegge() == null ? null : fascicle.getGgterminilegge(),fascicle.getSwterminilegge(), fascicle.getGgtempomedio() == null ? null : fascicle.getGgtempomedio(),fascicle.getCdstatoiteriniz(),
     			fascicle.getCdstatoiterfine(),fascicle.getDtfirma(),fascicle.getDtspedizione(),fascicle.getDtricevutaritorno(),null, 
     			fascicle.getIdpumaistanza(), fascicle.getProtpumaistanza(), fascicle.getDtbrevimanuist(), fascicle.getDtinizioattesa(),null,
     			fascicle.getDtrisposta(), fascicle.getCdrispostaottenuta(), null, fascicle.getCdpumarisposta(), fascicle.getIdprofilopuma(),
@@ -62,7 +62,7 @@ public class FascicleService {
     	
     }
 
-    public Fascicle getFascicolo(Integer id) {
+    public Fascicle getFascicolo(Long id) {
         //return fascicoloRepository.findOne(id);
         return fascicoloRepository.findById(id).get();
     }
@@ -71,7 +71,7 @@ public class FascicleService {
         fascicoloRepository.save(fascicolo);
     }
 
-    public void deleteFascicolo(Integer id) {
+    public void deleteFascicolo(Long id) {
         fascicoloRepository.deleteById(id);
     }
 

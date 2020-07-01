@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 
 import com.enel.permitting.GaPermittingApplication;
-import com.enel.permitting.entity.Car;
+import com.enel.permitting.model.Car;
 import com.enel.permitting.repository.CarRepository;
 
 import static org.junit.Assert.assertEquals;

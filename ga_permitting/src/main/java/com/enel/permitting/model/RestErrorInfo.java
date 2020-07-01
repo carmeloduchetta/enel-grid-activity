@@ -1,4 +1,4 @@
-package com.enel.permitting.entity;
+package com.enel.permitting.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

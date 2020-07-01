@@ -1,4 +1,4 @@
-package com.enel.permitting.entity;
+package com.enel.permitting.model;
 
 import javax.persistence.Column;
 import javax.persistence.ColumnResult;
@@ -75,7 +75,7 @@ public class Car {
 	
     @Id
     @GeneratedValue()
-    private long id;
+    private int id;
 
     @Column
     private String model;
@@ -83,7 +83,7 @@ public class Car {
     @Column
     private Integer year;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

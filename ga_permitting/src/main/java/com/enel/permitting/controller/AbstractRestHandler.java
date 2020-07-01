@@ -1,8 +1,8 @@
 package com.enel.permitting.controller;
 
-import com.enel.permitting.entity.RestErrorInfo;
 import com.enel.permitting.exception.DataFormatException;
 import com.enel.permitting.exception.ResourceNotFoundException;
+import com.enel.permitting.model.RestErrorInfo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

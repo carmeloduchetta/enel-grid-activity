@@ -1,4 +1,4 @@
-package com.enel.permitting;
+package com.enel.permitting.config;
 
 import com.google.common.base.Predicates;
 

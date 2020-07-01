@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.enel.permitting.entity.Fascicle;
+import com.enel.permitting.model.Fascicle;
 
 /**
  * Repository can be used to delegate CRUD operations against the data source: http://goo.gl/P1J8QH
@@ -22,16 +22,16 @@ import com.enel.permitting.entity.Fascicle;
 
 @Repository
 @Transactional
-public interface FascicleRepository extends JpaRepository<Fascicle, Integer> {	
+public interface FascicleRepository extends JpaRepository<Fascicle, Long> {	
     
     Fascicle findFascicoloByCditer(String cditer);
     Page findAll(Pageable pageable);
 
     @Procedure(name = "salvaFascicoloReale")
     HashMap<String,Object> saveFascicle(
-    		@Param("an_idfascicolo")       Integer idfascicolo,
-    		@Param("an_idente")            Integer idente,
-    		@Param("an_iddestinatario")    Integer iddestinatario,
+    		@Param("an_idfascicolo")       Long idfascicolo,
+    		@Param("an_idente")            Long idente,
+    		@Param("an_iddestinatario")    Long iddestinatario,
     		
     		@Param("as_cdfascicolo")       String cdfascicolo,
     		@Param("as_dsfascicolo")       String dsfascicolo,

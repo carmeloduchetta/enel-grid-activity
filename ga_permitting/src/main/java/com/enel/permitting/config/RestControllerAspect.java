@@ -1,4 +1,4 @@
-package com.enel.permitting;
+package com.enel.permitting.config;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

@@ -1,14 +1,12 @@
 package com.enel.permitting.repositories;
 
 import java.sql.CallableStatement;
-import java.sql.Types;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
-import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.junit.Test;
@@ -17,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.enel.permitting.GaPermittingApplication;
-import com.enel.permitting.beans.CarResult;
 import com.enel.permitting.beans.Document;
 
 import oracle.jdbc.OracleTypes;
@@ -53,21 +50,6 @@ public class StoredProcedureTest {
 				System.out.println("commentCount: "+commentCount);
 	}
 	
-	@Test
-	public void testFunction() {
-	    
-		List<CarResult> rawcars = entityManager
-				.createNamedQuery("FIND_CARS_AFTER_YEAR")
-				.setParameter(1, 2010)
-				.getResultList();
-				     
-		for(CarResult car: rawcars) {
-
-			System.out.println("ID CAR:"+ car.getId() +"- Model: "+car.getModel()+" - Year: "+car.getYear());
-			
-		}
-		
-	}
 	
 	@Test
 	public void testArdesiaiFunction() {

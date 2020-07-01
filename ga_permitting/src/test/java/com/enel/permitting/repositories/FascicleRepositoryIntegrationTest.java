@@ -55,10 +55,10 @@ public class FascicleRepositoryIntegrationTest {
     public void saveFascicleByProcedureTestByRepository() {
     	
 	   //HashMap<String,Object> result 
-			   
+    	Long idente = new Long(1000012);
     	HashMap<String,Object> result = fascicleRepository.saveFascicle(
 	    	        null,    //.............idfascicolo, 
-	    	        1000012, //.............identeprivate, mandatory
+	    	        idente, //.............identeprivate, mandatory
 	    	        null,    //.............iddestinatario, 
 	    	        "test procedure 6",                  //.............cdfascicolo, mandatory
 	    	        "concessione su strade consorziali", //.............dsfascicolo, 

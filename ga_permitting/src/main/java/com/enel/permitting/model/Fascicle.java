@@ -1,4 +1,4 @@
-package com.enel.permitting.entity;
+package com.enel.permitting.model;
 
 
 //import java.sql.Date;
@@ -13,15 +13,19 @@ import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /*
  * a simple domain entity doubling as a DTO
@@ -53,9 +57,9 @@ import lombok.NoArgsConstructor;
 		name = "salvaFascicoloReale", 
 		procedureName = "ARDESIAI.PCK_GEST_FASCREAL.SALVA_FASCICOLO_REALE",
 		parameters = { 
-				@StoredProcedureParameter(mode = ParameterMode.INOUT, type = Integer.class, name = "an_idfascicolo"),
-				@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "an_idente"),
-				@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "an_iddestinatario"),
+				@StoredProcedureParameter(mode = ParameterMode.INOUT, type = Long.class, name = "an_idfascicolo"),
+				@StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class, name = "an_idente"),
+				@StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class, name = "an_iddestinatario"),
 				
 				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_cdfascicolo"),
 				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_dsfascicolo"),
@@ -114,60 +118,155 @@ import lombok.NoArgsConstructor;
 		)		
 })
 
-@Entity
-@Table(name = "FASCICLE", schema = "ARDESIAI")
+
+@ApiModel
 @Getter
-@Builder
+@Setter
+//@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_NULL)
+@Entity
+@Table(name = "FASCREAL", schema = "ARDESIAI")
 public class Fascicle {
 	
 		@Id
 	    @GeneratedValue()
-		private int idfascicolo;
+		private Long idfascicolo;
+		
+		//@Transient
+		@Column()
+		private Long iditer;
+		
+		//@Transient
+		@Column()
+		private Integer idfascicolomod;
+		
+		//@Transient
+		@Column()
+		private String cdfascicolomod;
+		
+		//@Transient
+		@Column()
+		private String cdtipofascicolo;
+		
+		//@Transient
+		@Column()
+		private String swfacoltativoprogetto;
+		
+		//@Transient
+		@Column()
+		private String swfacoltativoricorso;
+		
+		//@Transient
+		@Column()
+		private Integer nmlivello;
+		
+		//@Transient
+		@Column()
+		private Date dtfasciniz;
+		
+		//@Transient
+		@Column()
+		private Integer idautorizzazione;
+		
+		//@Transient
+		@Column()
+		private String cdautorizzazione;
+		
+		//@Transient
+		@Column()
+		private String note;
+		
+		//@Transient
+		@Column()
+		private String swrealizzazione;
+		
+		//@Transient
+		@Column()
+		private String swstoriadoc;
+		
+		//@Transient
+		@Column()
+		private Integer idservitu;
+		
+		//@Transient
+		@Column()
+		private String canclogica;
+		
+		//@Transient
+		@Column()
+		private Date datains;
+		
+		//@Transient
+		@Column()
+		private  String procins;
+		
+		//@Transient
+		@Column()
+		private Date datamod;
+		
+		//@Transient
+		@Column()
+		private String procmod;
+		
+		//@Transient
+		@Column()
+		private String swcessioneresp;
 	    
 	    @Column()
-		private int idente;
+	    @ApiParam(value = "The ID of the Ente.", required = true)
+		private Long idente;
 	    
 	    @Column()
-		private int iddestinatario;
+		private Long iddestinatario;
 	    
 	    @Column()
+	    @ApiModelProperty(
+	    		  required=true,
+	    		  value = "Code of a Fascicle",
+	    		  name = "Fascicle Code",
+	    		  dataType = "String",
+	    		  example = "test procedure")
 		private String cdfascicolo;
 	    
 	    @Column()
 		private String dsfascicolo;
 	    
 	    @Column()
+	    @ApiModelProperty(required=true)
 		private String cditer;
 	    
 	    @Column()
+	    @ApiModelProperty(required=true)
 		private String userins;
 	    
 	    @Column()
 		private String usermod;
 	    
 	    @Column()
-		private int idinddestinat;
+		private Integer idinddestinat;
 		
 	    @Column()
-	    private int idunitaresp;
+	    @ApiModelProperty(required=true)
+	    private Integer idunitaresp;
 		
 	    @Column()
+	    @ApiModelProperty(required=true)
 	    private String cdtiporichiesta;
 		
 	    @Column()
+	    @ApiModelProperty(required=true)
 	    private String cdtiporisposta;
 		
 	    @Column()
-	    private int ggterminilegge;
+	    private Integer ggterminilegge;
 		
 	    @Column()
 	    private String swterminilegge;
 		
 	    @Column()
-	    private int ggtempomedio;
+	    private Integer ggtempomedio;
 		
 	    @Column()
 	    private String cdstatoiteriniz;
@@ -181,7 +280,7 @@ public class Fascicle {
 		
 	    @Column()
 	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
-	    private java.sql.Date dtspedizione;
+	    private Date dtspedizione;
 		
 	    @Column()
 	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")

@@ -2,24 +2,22 @@ package com.enel.permitting.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.enel.permitting.beans.FascicleResult;
-import com.enel.permitting.entity.Fascicle;
-import com.enel.permitting.exception.DataFormatException;
+import com.enel.permitting.model.Fascicle;
 import com.enel.permitting.service.FascicleService;
 
 import io.swagger.annotations.Api;
@@ -41,9 +39,9 @@ public class FascicleController extends AbstractRestHandler {
     private FascicleService fascicleService;
     
     @RequestMapping(value = "",
-    method = RequestMethod.POST,
-    consumes = {"application/json"},
-    produces = {"application/json"})
+    		method = RequestMethod.POST,
+    		consumes = "application/json; charset=UTF-8",
+    		produces = "application/json; charset=UTF-8")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Create a Fascicle resource.", notes = "Returns the URL of the new resource in the Location header.")
     public FascicleResult createFascicle(@RequestBody Fascicle fascicle, //) {
@@ -51,7 +49,7 @@ public class FascicleController extends AbstractRestHandler {
     	
     	
     	FascicleResult createdFascicle = fascicleService.createFascicle(fascicle);
-    	if(createdFascicle.getAn_idfascicolo() > 0)
+    	if(createdFascicle.getAn_idfascicolo() != null && createdFascicle.getAn_idfascicolo() > 0)
     		response.setHeader("Location", request.getRequestURL().append("/").append(createdFascicle.getAn_idfascicolo()).toString());
     	
     	return createdFascicle;
@@ -81,7 +79,7 @@ public class FascicleController extends AbstractRestHandler {
     public
     @ResponseBody
     Fascicle getFascicolo(@ApiParam(value = "The ID of the fascicle.", required = true)
-                             @PathVariable("id") Integer id,
+                             @PathVariable("id") Long id,
                              HttpServletRequest request, HttpServletResponse response) throws Exception {
     	Fascicle fascicolo = this.fascicleService.getFascicolo(id);
         checkResourceFound(fascicolo);

@@ -28,8 +28,7 @@ public class FascicleResult implements Serializable {
 	private String as_cdstatosuccessivo;
 	private String as_cdstatoprecedente;
 	
-	//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
 	private Date ad_dttermineprevista;
 	private String as_listastati;
 	private String as_repaintgraph;
