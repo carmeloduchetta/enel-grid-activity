@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 import com.enel.permitting.GaPermittingApplication;
 import com.enel.permitting.model.Car;
-import com.enel.permitting.repository.CarRepository;
+import com.enel.permitting.repository.italy.CarRepository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

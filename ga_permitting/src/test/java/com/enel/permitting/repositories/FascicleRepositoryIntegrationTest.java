@@ -19,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.enel.permitting.GaPermittingApplication;
-import com.enel.permitting.repository.FascicleRepository;
+import com.enel.permitting.repository.italy.FascicleItalyRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GaPermittingApplication.class)
@@ -32,7 +32,7 @@ public class FascicleRepositoryIntegrationTest {
 	DataSource datasource;
 	
     @Autowired
-    private FascicleRepository fascicleRepository;
+    private FascicleItalyRepository fascicleRepository;
     
     //@Test
     public void checkRegisterParameterOnDB() {

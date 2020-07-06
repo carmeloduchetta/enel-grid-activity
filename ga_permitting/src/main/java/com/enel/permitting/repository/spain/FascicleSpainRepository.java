@@ -1,4 +1,4 @@
-package com.enel.permitting.repository;
+package com.enel.permitting.repository.spain;
 
 import java.time.LocalDate;
 //import java.sql.Date;
@@ -20,9 +20,9 @@ import com.enel.permitting.model.Fascicle;
  * Repository can be used to delegate CRUD operations against the data source: http://goo.gl/P1J8QH
  */
 
-@Repository
-@Transactional
-public interface FascicleRepository extends JpaRepository<Fascicle, Long> {	
+//@Repository
+//@Transactional
+public interface FascicleSpainRepository extends JpaRepository<Fascicle, Long> {	
     
     Fascicle findFascicoloByCditer(String cditer);
     Page findAll(Pageable pageable);

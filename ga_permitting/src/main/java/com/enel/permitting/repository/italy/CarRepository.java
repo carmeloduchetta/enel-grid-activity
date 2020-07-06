@@ -1,4 +1,4 @@
-package com.enel.permitting.repository;
+package com.enel.permitting.repository.italy;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.enel.permitting.model.Car;
 
-@Repository
+//@Repository
 @Transactional
 public interface CarRepository extends JpaRepository<Car, Integer> {
 
