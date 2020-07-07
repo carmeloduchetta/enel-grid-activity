@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.enel.permitting.beans.FascicleResult;
 import com.enel.permitting.config.Country;
 import com.enel.permitting.model.Fascicle;
+import com.enel.permitting.model.RestErrorInfo;
 import com.enel.permitting.repository.italy.FascicleItalyRepository;
 import com.enel.permitting.repository.spain.FascicleSpainRepository;
 import com.enel.permitting.util.JSONHelper;
@@ -41,6 +42,7 @@ public class FascicleService {
     	    
     	    	case it:
     	    		
+    	    		//fascicleItalyRepository.startSession(fascicle.userins(), ApiConstants.APPLICATION_INIZIALIZATION, country.name());
     	    		mapResult = fascicleItalyRepository.saveFascicle(
     	        			fascicle.idfascicolo(),fascicle.idente(), fascicle.iddestinatario(),fascicle.cdfascicolo(),fascicle.dsfascicolo(),
     	        			fascicle.cditer(), fascicle.userins(), fascicle.idinddestinat(), fascicle.idunitaresp(), fascicle.cdtiporichiesta(),
@@ -49,10 +51,12 @@ public class FascicleService {
     	        			fascicle.idpumaistanza(), fascicle.protpumaistanza(), fascicle.dtbrevimanuist(), fascicle.dtinizioattesa(),null,
     	        			fascicle.dtrisposta(), fascicle.cdrispostaottenuta(), null, fascicle.cdpumarisposta(), fascicle.idprofilopuma(),
     	        			fascicle.dtbrevimanurisp(), fascicle.dtfascfine(), fascicle.cdesitofasc(), fascicle.swprescrizione(),fascicle.noteprescrizione());
-    	        	break;
+    	    		//fascicleItalyRepository.endSession();
+    	    		break;
     	    	
-    	    	case sp:
+    	    	case es:
     	    		
+    	    		//fascicleSpainRepository.startSession(fascicle.userins(), ApiConstants.APPLICATION_INIZIALIZATION, country.name());
     	    		mapResult = fascicleSpainRepository.saveFascicle(
     	        			fascicle.idfascicolo(),fascicle.idente(), fascicle.iddestinatario(),fascicle.cdfascicolo(),fascicle.dsfascicolo(),
     	        			fascicle.cditer(), fascicle.userins(), fascicle.idinddestinat(), fascicle.idunitaresp(), fascicle.cdtiporichiesta(),
@@ -61,7 +65,7 @@ public class FascicleService {
     	        			fascicle.idpumaistanza(), fascicle.protpumaistanza(), fascicle.dtbrevimanuist(), fascicle.dtinizioattesa(),null,
     	        			fascicle.dtrisposta(), fascicle.cdrispostaottenuta(), null, fascicle.cdpumarisposta(), fascicle.idprofilopuma(),
     	        			fascicle.dtbrevimanurisp(), fascicle.dtfascfine(), fascicle.cdesitofasc(), fascicle.swprescrizione(),fascicle.noteprescrizione());
-    	    		
+    	    		//fascicleSpainRepository.endSession();
     	    		/*mapResult = fascicleSpainRepository.saveFascicle(
     	        			fascicle.getIdfascicolo(),fascicle.getIdente(), fascicle.iddestinatario() == null ? null : fascicle.iddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
     	        			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == null ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == null ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),
@@ -82,6 +86,10 @@ public class FascicleService {
     		return JSONHelper.convertValue(mapResult, FascicleResult.class);
     		
     	} catch(Exception ex) {
+    		LOGGER.info(ex.getLocalizedMessage());
+    		LOGGER.info(ex.getMessage());
+    		LOGGER.info(ex.getCause().toString());
+    		//return new RestErrorInfo(ex, "Sorry I couldn't find it.");
     		ex.getStackTrace();
     		return null;
     	}
@@ -99,7 +107,7 @@ public class FascicleService {
     	    
     	    	case it:
     	    		return fascicleItalyRepository.findById(id).get();
-    	    	case sp:
+    	    	case es:
     	    		return fascicleSpainRepository.findById(id).get();
     	    	
     	    	default: 

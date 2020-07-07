@@ -26,6 +26,16 @@ public interface FascicleItalyRepository extends JpaRepository<Fascicle, Long> {
     
     Fascicle findFascicoloByCditer(String cditer);
     Page findAll(Pageable pageable);
+    
+    @Procedure(name = "startSession")
+    void startSession(
+    		@Param("as_user") String user,
+    		@Param("as_application") String application,
+    		@Param("as_locale") String local    		
+    );
+
+    @Procedure(name = "endSession")
+    void endSession();
 
     @Procedure(name = "salvaFascicoloReale")
     HashMap<String,Object> saveFascicle(

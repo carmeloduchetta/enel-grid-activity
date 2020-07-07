@@ -1,4 +1,4 @@
-package com.enel.permitting.repositories;
+package com.enel.permitting.italy.repository;
 
 
 import org.junit.After;

@@ -12,6 +12,7 @@ public final class ApiConstants {
 	public static final String BAD_REQUEST_MESSAGE = "Invalid data supplied";
 	public static final String INTERNAL_ERROR_MESSAGE = "Internal server error";
 
+	public static final String APPLICATION_INIZIALIZATION = "ARDESIA_ONLINE";
 	private ApiConstants() {
 		// Constants
 	}

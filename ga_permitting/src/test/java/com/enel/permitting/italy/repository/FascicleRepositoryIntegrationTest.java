@@ -1,4 +1,4 @@
-package com.enel.permitting.repositories;
+package com.enel.permitting.italy.repository;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -17,12 +17,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.enel.permitting.GaPermittingApplication;
 import com.enel.permitting.repository.italy.FascicleItalyRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GaPermittingApplication.class)
+@Transactional("italyDatabaseTransactionManager")
 public class FascicleRepositoryIntegrationTest {
 
 	@PersistenceContext
@@ -51,7 +53,7 @@ public class FascicleRepositoryIntegrationTest {
 		}
     }
     
-    @Test 
+    //@Test 
     public void saveFascicleByProcedureTestByRepository() {
     	
 	   //HashMap<String,Object> result 
@@ -335,7 +337,7 @@ public class FascicleRepositoryIntegrationTest {
 				)
 
 				.setParameter(2, 1000012)
-				.setParameter(4, "test procedure 7")
+				.setParameter(4, "test procedure 1.0.1")
 				.setParameter(5, "concessione su strade consorziali EM")
 				.setParameter(6, "1925484")
 				.setParameter(7, "A325137")
@@ -348,7 +350,11 @@ public class FascicleRepositoryIntegrationTest {
 				query.execute();
 				
 				Integer idfascicolo = (Integer) query.getOutputParameterValue(1);
+			
+				String major_msg = (String) query.getOutputParameterValue(44);
+				String minor_msg = (String) query.getOutputParameterValue(45);
 				
-				System.out.println("idfascicolo: "+idfascicolo);				
+				System.out.println("idfascicolo: "+idfascicolo + " major: "+major_msg+ " minor: "+minor_msg);
+				
     }
 }

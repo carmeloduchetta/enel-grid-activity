@@ -51,7 +51,7 @@ public class FascicleController extends AbstractRestHandler {
                          HttpServletRequest request, HttpServletResponse response) {
   
     	FascicleResult createdFascicle = fascicleService.createFascicle(fascicle,country);
-    	if(createdFascicle.getAn_idfascicolo() != null && createdFascicle.getAn_idfascicolo() > 0)
+    	if(createdFascicle != null && createdFascicle.getAn_idfascicolo() != null && createdFascicle.getAn_idfascicolo() > 0)
     		response.setHeader("Location", request.getRequestURL().append("/").append(createdFascicle.getAn_idfascicolo()).toString());
     	
     	return createdFascicle;

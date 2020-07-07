@@ -13,7 +13,7 @@ public class RestControllerAspect {
 
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Before("execution(public * com.enel.permitting.api.rest.*Controller.*(..))")
+    @Before("execution(public * com.enel.permitting.controller.*Controller.*(..))")
     public void logBeforeRestCall(JoinPoint pjp) throws Throwable {
         log.info(":::::AOP Before REST call:::::" + pjp);
     }

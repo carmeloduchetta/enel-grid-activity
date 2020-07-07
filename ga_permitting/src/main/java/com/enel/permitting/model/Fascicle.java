@@ -120,7 +120,20 @@ import lombok.experimental.Accessors;
 
 		}/*,
 		resultSetMappings = {"getFascicleResult"}*/
-		)		
+	),
+	@NamedStoredProcedureQuery(
+		name = "startSession", 
+		procedureName = "COMMONSERVICES.P#ENVIRONMENT.STARTSESSION",
+		parameters = { 
+				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_user"),
+				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_application"),
+				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_locale")
+		}
+	),
+	@NamedStoredProcedureQuery(
+			name = "endSession", 
+			procedureName = "COMMONSERVICES.P#ENVIRONMENT.ENDSESSION"
+	)
 })
 
 

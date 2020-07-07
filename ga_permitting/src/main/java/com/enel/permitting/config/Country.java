@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Country {
 	
-	it,sp;
+	it,es;
 	
 	private static final Logger log = LoggerFactory.getLogger(Country.class);
 	
