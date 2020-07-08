@@ -1,23 +1,18 @@
 package com.enel.permitting.spain.repository;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
-import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
-import javax.sql.DataSource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.enel.permitting.GaPermittingApplication;
@@ -28,7 +23,8 @@ import com.enel.permitting.repository.spain.FascicleSpainRepository;
 @SpringBootTest(classes = {GaPermittingApplication.class, SpainDatabaseConfiguration.class})//(classes = GaPermittingApplication.class)
 public class FascicleSpainRepositoryIntegrationTest {
 
-    private EntityManager entityManager;
+	@Autowired
+	private ApplicationContext context;
 		
     //@Autowired
     private FascicleSpainRepository fascicleRepository;
