@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enel.permitting.beans.FascicleResult;
+import com.enel.permitting.config.ApiConstants;
 import com.enel.permitting.config.Country;
 import com.enel.permitting.model.Fascicle;
-import com.enel.permitting.model.RestErrorInfo;
 import com.enel.permitting.repository.italy.FascicleItalyRepository;
 import com.enel.permitting.repository.spain.FascicleSpainRepository;
 import com.enel.permitting.util.JSONHelper;
@@ -44,28 +44,28 @@ public class FascicleService {
     	    		
     	    		//fascicleItalyRepository.startSession(fascicle.userins(), ApiConstants.APPLICATION_INIZIALIZATION, country.name());
     	    		mapResult = fascicleItalyRepository.saveFascicle(
-    	        			fascicle.idfascicolo(),fascicle.idente(), fascicle.iddestinatario(),fascicle.cdfascicolo(),fascicle.dsfascicolo(),
-    	        			fascicle.cditer(), fascicle.userins(), fascicle.idinddestinat(), fascicle.idunitaresp(), fascicle.cdtiporichiesta(),
-    	        			fascicle.cdtiporisposta(),fascicle.ggterminilegge(),fascicle.swterminilegge(), fascicle.ggtempomedio(),fascicle.cdstatoiteriniz(),
-    	        			fascicle.cdstatoiterfine(),fascicle.dtfirma(),fascicle.dtspedizione(),fascicle.dtricevutaritorno(),null, 
-    	        			fascicle.idpumaistanza(), fascicle.protpumaistanza(), fascicle.dtbrevimanuist(), fascicle.dtinizioattesa(),null,
-    	        			fascicle.dtrisposta(), fascicle.cdrispostaottenuta(), null, fascicle.cdpumarisposta(), fascicle.idprofilopuma(),
-    	        			fascicle.dtbrevimanurisp(), fascicle.dtfascfine(), fascicle.cdesitofasc(), fascicle.swprescrizione(),fascicle.noteprescrizione());
+    	        			fascicle.getIdfascicolo() == null ? null : fascicle.getIdfascicolo(),fascicle.getIdente() == null ? null : fascicle.getIdente(), fascicle.getIddestinatario() == null ? null : fascicle.getIddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
+    	        			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == null ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == null ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),
+    	        			fascicle.getCdtiporisposta(),fascicle.getGgterminilegge() == null ? null : fascicle.getGgterminilegge(),fascicle.getSwterminilegge(), fascicle.getGgtempomedio() == null ? null : fascicle.getGgtempomedio(),fascicle.getCdstatoiteriniz(),
+    	        			fascicle.getCdstatoiterfine(),fascicle.getDtfirma(),fascicle.getDtspedizione(),fascicle.getDtricevutaritorno(),null, 
+    	        			fascicle.getIdpumaistanza(), fascicle.getProtpumaistanza(), fascicle.getDtbrevimanuist(), fascicle.getDtinizioattesa(),null,
+    	        			fascicle.getDtrisposta(), fascicle.getCdrispostaottenuta(), null, fascicle.getCdpumarisposta(), fascicle.getIdprofilopuma(),
+    	        			fascicle.getDtbrevimanurisp(), fascicle.getDtfascfine(), fascicle.getCdesitofasc(), fascicle.getSwprescrizione(),fascicle.getNoteprescrizione());
     	    		//fascicleItalyRepository.endSession();
     	    		break;
     	    	
     	    	case es:
     	    		
-    	    		//fascicleSpainRepository.startSession(fascicle.userins(), ApiConstants.APPLICATION_INIZIALIZATION, country.name());
+    	    		fascicleSpainRepository.startSession(fascicle.getUserins(), ApiConstants.APPLICATION_INIZIALIZATION, country.name());
     	    		mapResult = fascicleSpainRepository.saveFascicle(
-    	        			fascicle.idfascicolo(),fascicle.idente(), fascicle.iddestinatario(),fascicle.cdfascicolo(),fascicle.dsfascicolo(),
-    	        			fascicle.cditer(), fascicle.userins(), fascicle.idinddestinat(), fascicle.idunitaresp(), fascicle.cdtiporichiesta(),
-    	        			fascicle.cdtiporisposta(),fascicle.ggterminilegge(),fascicle.swterminilegge(), fascicle.ggtempomedio(),fascicle.cdstatoiteriniz(),
-    	        			fascicle.cdstatoiterfine(),fascicle.dtfirma(),fascicle.dtspedizione(),fascicle.dtricevutaritorno(),null, 
-    	        			fascicle.idpumaistanza(), fascicle.protpumaistanza(), fascicle.dtbrevimanuist(), fascicle.dtinizioattesa(),null,
-    	        			fascicle.dtrisposta(), fascicle.cdrispostaottenuta(), null, fascicle.cdpumarisposta(), fascicle.idprofilopuma(),
-    	        			fascicle.dtbrevimanurisp(), fascicle.dtfascfine(), fascicle.cdesitofasc(), fascicle.swprescrizione(),fascicle.noteprescrizione());
-    	    		//fascicleSpainRepository.endSession();
+    	        			fascicle.getIdfascicolo() == null ? null : fascicle.getIdfascicolo(),fascicle.getIdente() == null ? null : fascicle.getIdente(), fascicle.getIddestinatario() == null ? null : fascicle.getIddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
+    	        			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == null ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == null ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),
+    	        			fascicle.getCdtiporisposta(),fascicle.getGgterminilegge() == null ? null : fascicle.getGgterminilegge(),fascicle.getSwterminilegge(), fascicle.getGgtempomedio() == null ? null : fascicle.getGgtempomedio(),fascicle.getCdstatoiteriniz(),
+    	        			fascicle.getCdstatoiterfine(),fascicle.getDtfirma(),fascicle.getDtspedizione(),fascicle.getDtricevutaritorno(),null, 
+    	        			fascicle.getIdpumaistanza(), fascicle.getProtpumaistanza(), fascicle.getDtbrevimanuist(), fascicle.getDtinizioattesa(),null,
+    	        			fascicle.getDtrisposta(), fascicle.getCdrispostaottenuta(), null, fascicle.getCdpumarisposta(), fascicle.getIdprofilopuma(),
+    	        			fascicle.getDtbrevimanurisp(), fascicle.getDtfascfine(), fascicle.getCdesitofasc(), fascicle.getSwprescrizione(),fascicle.getNoteprescrizione());
+    	    		fascicleSpainRepository.endSession();
     	    		/*mapResult = fascicleSpainRepository.saveFascicle(
     	        			fascicle.getIdfascicolo(),fascicle.getIdente(), fascicle.iddestinatario() == null ? null : fascicle.iddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
     	        			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == null ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == null ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),

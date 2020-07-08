@@ -5,6 +5,8 @@ import java.sql.DatabaseMetaData;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
@@ -17,26 +19,21 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.enel.permitting.GaPermittingApplication;
+import com.enel.permitting.config.country.SpainDatabaseConfiguration;
 import com.enel.permitting.repository.spain.FascicleSpainRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = GaPermittingApplication.class)
-@Transactional("spainDatabaseTransactionManager")
+@SpringBootTest(classes = {GaPermittingApplication.class, SpainDatabaseConfiguration.class})//(classes = GaPermittingApplication.class)
 public class FascicleSpainRepositoryIntegrationTest {
 
-	@PersistenceContext
     private EntityManager entityManager;
-	
-	@Autowired
-	DataSource datasource;
-	
-    @Autowired
+		
+    //@Autowired
     private FascicleSpainRepository fascicleRepository;
     
-    //@Test
+    /*@Test
     public void checkRegisterParameterOnDB() {
 		try {
 			Connection conn = datasource.getConnection();
@@ -51,27 +48,29 @@ public class FascicleSpainRepositoryIntegrationTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
+    }*/
     
     //@Test 
     public void saveFascicleByProcedureTestByRepository() {
     	
-	   //HashMap<String,Object> result 
-    	Long idente = new Long(1000012);
+    	Long idente = new Long(540);
+    	Long iddestinatario = new Long(262865);
+    	String user = "ES40983228B";
+    	fascicleRepository.startSession(user, "ARDESIA_ONLINE", "es");
     	HashMap<String,Object> result = fascicleRepository.saveFascicle(
 	    	        null,    //.............idfascicolo, 
-	    	        idente, //.............identeprivate, mandatory
-	    	        null,    //.............iddestinatario, 
-	    	        "test procedure 6",                  //.............cdfascicolo, mandatory
-	    	        "concessione su strade consorziali", //.............dsfascicolo, 
-	    	        "1925484",  //.............cditer, mandatory
-	    	        "A325137",  //.............utente, mandatory
-	    	        null,       //.............idinddestinat, 
-	    	        1000491080, //.............idunitaresp, mandatory
-	    	        "AUTOR",    //.............cdtiporichiesta, mandatory
+	    	        idente,  //.............identeprivate, mandatory
+	    	        iddestinatario,    //.............iddestinatario, 
+	    	        "unit test procedure spain 1.1",           //.............cdfascicolo, mandatory
+	    	        "concessione su strade consorziali SPAIN", //.............dsfascicolo, 
+	    	        "24216449",     //.............cditer, mandatory
+	    	        user,  //.............utente, mandatory
+	    	        null,  //.............idinddestinat, 
+	    	        262865,  //.............idunitaresp, mandatory
+	    	        "AUTOR", //.............cdtiporichiesta, mandatory
 	    	        "RI", //.............cdtiporisposta, mandatory
-	    	        90,   //.............ggterminilegge, optional check with Spain and Italy
-	    	        "N",  //.............swterminilegge, optional check with Spain and Italy
+	    	        null, //.............ggterminilegge, optional check with Spain and Italy
+	    	        null, //.............swterminilegge, optional check with Spain and Italy
 	    	        null, //.............ggtempomedio, 
 	    	        null, //.............cdstatoiteriniz, 
 	    	        null, //.............cdstatoiterfine,     	        
@@ -95,12 +94,91 @@ public class FascicleSpainRepositoryIntegrationTest {
 	    	        null, //.............swprescrizione, 
 	    	        null  //.............noteprescrizione
 	    	);
+    	fascicleRepository.endSession();
+    	printMap(result);
     	    
     }
 
+    /*@Test 
+    public void saveFascicleByProcedureTest2ByRepository() {
+    	
+    	Long idente = new Long(500);
+    	HashMap<String,Object> result = fascicleRepository.saveFascicle(
+	    	        null,    //.............idfascicolo, 
+	    	        idente,  //.............identeprivate, mandatory
+	    	        268617,    //.............iddestinatario, 
+	    	        "unit test procedure spain 1.1",           //.............cdfascicolo, mandatory
+	    	        "concessione su strade consorziali SPAIN", //.............dsfascicolo, 
+	    	        "U00052445",     //.............cditer, mandatory
+	    	        "ES40983228B",  //.............utente, mandatory
+	    	        null,  //.............idinddestinat, 
+	    	        265517,  //.............idunitaresp, mandatory
+	    	        "TRATT", //.............cdtiporichiesta, mandatory
+	    	        "RI", //.............cdtiporisposta, mandatory
+	    	        null, //.............ggterminilegge, optional check with Spain and Italy
+	    	        null, //.............swterminilegge, optional check with Spain and Italy
+	    	        30, //.............ggtempomedio, 
+	    	        null, //.............cdstatoiteriniz, 
+	    	        null, //.............cdstatoiterfine,     	        
+	    	        null, //.............dtfirma, 
+	    	        null, //.............dtspedizione, 
+	    	        null, //.............dtricevutaritorno, 
+	    	        null, //.............forzastato, 
+	    	        null, //.............idpumaistanza, 
+	    	        null, //.............protpumaistanza, 
+	    	        null, //.............dataBreviManuIst, 
+	    	        null, //.............dtinizioattesa, 
+	    	        null, //.............flagavanzamento, 
+	    	        null, //.............dtrisposta, 
+	    	        null, //.............cdrispostaottenuta, 
+	    	        null, //.............condizioni, 
+	    	        null, //.............cdpumarisposta, 
+	    	        null, //.............idprofilopuma, 
+	    	        null, //.............dataBreviManuRisp, 
+	    	        null, //.............dtfascfine, 
+	    	        null, //.............cdesitofasc, 
+	    	        null, //.............swprescrizione, 
+	    	        null  //.............noteprescrizione
+	    	);
+    	
+    	printMap(result);
+    	    
+    }*/
+
+    public static void printMap(Map mp) {
+        Iterator it = mp.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+    }
     
     @Test 
     public void saveFascicleByProcedureTestByEM() {
+    	
+    	StoredProcedureQuery startSession = entityManager
+    			.createStoredProcedureQuery("COMMONSERVICES.P#ENVIRONMENT.STARTSESSION")
+    			.registerStoredProcedureParameter(
+				    1,
+				    String.class,
+				    ParameterMode.INOUT
+				)
+				.registerStoredProcedureParameter(
+				    2,
+				    String.class,
+				    ParameterMode.IN
+				)
+				.registerStoredProcedureParameter(
+					    3,
+					    String.class,
+					    ParameterMode.IN
+				)
+				.setParameter(1, "ES40983228B")
+				.setParameter(2, "ARDESIA_ONLINE")
+				.setParameter(3, "es");
+    	
+    	startSession.execute();
     	
     	StoredProcedureQuery query = entityManager
 				.createStoredProcedureQuery("ARDESIAI.PCK_GEST_FASCREAL.SALVA_FASCICOLO_REALE")
@@ -337,11 +415,12 @@ public class FascicleSpainRepositoryIntegrationTest {
 				)
 
 				.setParameter(2, 540)
+				.setParameter(3, 262865)
 				.setParameter(4, "unit test procedure spain 1.0")
 				.setParameter(5, "concessione su strade consorziali EM")
 				.setParameter(6, "24216449")
 				.setParameter(7, "ES40983228B")
-				.setParameter(8, 262865)
+				//.setParameter(8, 262865)
 				.setParameter(9, 262865)
 				.setParameter(10, "AUTOR")
 				.setParameter(11, "RI");
@@ -355,5 +434,9 @@ public class FascicleSpainRepositoryIntegrationTest {
 				String minor_msg = (String) query.getOutputParameterValue(45);
 				
 				System.out.println("idfascicolo: "+idfascicolo + " major: "+major_msg+ " minor: "+minor_msg);
+
+				StoredProcedureQuery endSession = entityManager
+		    			.createStoredProcedureQuery("COMMONSERVICES.P#ENVIRONMENT.ENDSESSION");
+				endSession.execute();
     }
 }

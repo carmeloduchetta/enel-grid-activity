@@ -24,7 +24,6 @@ import com.enel.permitting.repository.italy.FascicleItalyRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GaPermittingApplication.class)
-@Transactional("italyDatabaseTransactionManager")
 public class FascicleRepositoryIntegrationTest {
 
 	@PersistenceContext

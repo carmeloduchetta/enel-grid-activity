@@ -1,7 +1,6 @@
 package com.enel.permitting.model;
 
 
-import java.io.Serializable;
 //import java.sql.Date;
 import java.util.Date;
 
@@ -14,23 +13,19 @@ import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.Setter;
 
 /*
  * a simple domain entity doubling as a DTO
@@ -120,108 +115,87 @@ import lombok.experimental.Accessors;
 
 		}/*,
 		resultSetMappings = {"getFascicleResult"}*/
-	),
-	@NamedStoredProcedureQuery(
-		name = "startSession", 
-		procedureName = "COMMONSERVICES.P#ENVIRONMENT.STARTSESSION",
-		parameters = { 
-				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_user"),
-				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_application"),
-				@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_locale")
-		}
-	),
-	@NamedStoredProcedureQuery(
-			name = "endSession", 
-			procedureName = "COMMONSERVICES.P#ENVIRONMENT.ENDSESSION"
-	)
+		),
+		@NamedStoredProcedureQuery(
+			name = "startSession", 
+			procedureName = "COMMONSERVICES.P#ENVIRONMENT.STARTSESSION",
+			parameters = { 
+					@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_user"),
+					@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_application"),
+					@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "as_locale")
+			}
+		),
+		@NamedStoredProcedureQuery(
+				name = "endSession", 
+				procedureName = "COMMONSERVICES.P#ENVIRONMENT.ENDSESSION"
+		)
 })
 
 
-//@Getter
-//@Setter
-
 @ApiModel
-@JsonAutoDetect(fieldVisibility = Visibility.ANY)
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@Data
-@Accessors(fluent = true)
+@Getter
+@Setter
+//@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(Include.NON_NULL)
 @Entity
 @Table(name = "FASCREAL", schema = "ARDESIAI")
-public class Fascicle implements Serializable {
-	
-		private static final long serialVersionUID = 1L;
+public class Fascicle {
 	
 		@Id
 	    @GeneratedValue()
 		private Long idfascicolo;
 		
-		
-		/**
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private Long iditer;
 		
-		
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private Integer idfascicolomod;
 		
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private String cdfascicolomod;
 		
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private String cdtipofascicolo;
 		
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private String swfacoltativoprogetto;
 		
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private String swfacoltativoricorso;
 		
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private Integer nmlivello;
 		
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private Date dtfasciniz;
 		
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private Integer idautorizzazione;
 		
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private String cdautorizzazione;
 		
 		//@Transient
-		@JsonProperty(access = Access.WRITE_ONLY)
 		@Column()
 		private String note;
 		
 		//@Transient
-		@JsonProperty(access = Access.READ_ONLY)
 		@Column()
 		private String swrealizzazione;
 		
 		//@Transient
-		@JsonProperty(access = Access.READ_ONLY)
 		@Column()
 		private String swstoriadoc;
 		
@@ -251,7 +225,7 @@ public class Fascicle implements Serializable {
 		
 		//@Transient
 		@Column()
-		private String swcessioneresp;**/
+		private String swcessioneresp;
 	    
 	    @Column()
 	    @ApiParam(value = "The ID of the Ente.", required = true)
