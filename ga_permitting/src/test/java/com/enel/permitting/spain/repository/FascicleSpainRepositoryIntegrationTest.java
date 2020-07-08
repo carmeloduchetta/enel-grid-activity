@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
+import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
 
 import org.junit.Test;
@@ -25,6 +27,10 @@ public class FascicleSpainRepositoryIntegrationTest {
 
 	@Autowired
 	private ApplicationContext context;
+	
+	@PersistenceContext
+    private EntityManager entityManager;
+	
 		
     //@Autowired
     private FascicleSpainRepository fascicleRepository;
