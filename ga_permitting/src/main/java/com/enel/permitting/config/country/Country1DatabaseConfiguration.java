@@ -17,20 +17,20 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.enel.permitting.repository.italy",
-entityManagerFactoryRef = "italyDatabaseEntityManager", transactionManagerRef = "italyDatabaseTransactionManager")
-public class ItalyDatabaseConfiguration {
+@EnableJpaRepositories(basePackages = "com.enel.permitting.repository.country1",
+entityManagerFactoryRef = "country1DatabaseEntityManager", transactionManagerRef = "country1DatabaseTransactionManager")
+public class Country1DatabaseConfiguration {
 	
 	@Autowired
 	Environment env;
 
-	public ItalyDatabaseConfiguration() {super();}
+	public Country1DatabaseConfiguration() {super();}
 	
 	@Primary
     @Bean
-    public LocalContainerEntityManagerFactoryBean italyDatabaseEntityManager() {
+    public LocalContainerEntityManagerFactoryBean country1DatabaseEntityManager() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(italyDataSource());
+        em.setDataSource(country1DataSource());
         em.setPackagesToScan("com.enel.permitting.model");
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -42,18 +42,6 @@ public class ItalyDatabaseConfiguration {
         properties.put("hibernate.proc.param_null_passing", env.getProperty("spring.jpa.properties.hibernate.proc.param_null_passing"));
         properties.put("hibernate.show_sql", env.getProperty("spring.jpa.properties.hibernate.show_sql"));
         
-        //properties.put("hibernate.jdbc.batch_size", env.getProperty("spring.jpa.properties.hibernate.jdbc.batch_size"));
-        //properties.put("hibernate.order_inserts", env.getProperty("spring.jpa.properties.hibernate.order_inserts"));
-        //properties.put("hibernate.order_updates", env.getProperty("spring.jpa.properties.hibernate.order_updates"));
-        //properties.put("hibernate.jdbc.batch_versioned_data", env.getProperty("spring.jpa.properties.hibernate.jdbc.batch_versioned_data"));
-        //properties.put("hibernate.generate_statistics", env.getProperty("spring.jpa.properties.hibernate.generate_statistics"));
-        //properties.put("hibernate.id.new_generator_mappings", env.getProperty("spring.jpa.properties.hibernate.id.new_generator_mappings"));
-        //properties.put("hhibernate.cache.use_second_level_cache", env.getProperty("spring.jpa.properties.hibernate.cache.use_second_level_cache"));
-        //properties.put("hibernate.globally_quoted_identifiers", env.getProperty("spring.jpa.properties.hibernate.globally_quoted_identifiers"));
-        //properties.put("hibernate.format_sql", env.getProperty("spring.jpa.properties.hibernate.format_sql"));
-        //properties.put("hibernate.use_sql_comments", env.getProperty("spring.jpa.properties.hibernate.use_sql_comments"));
-        //properties.put("hibernate.type", env.getProperty("spring.jpa.properties.hibernate.type"));
-        //properties.put("hibernate.naming.physical-strategy", env.getProperty("spring.jpa.hibernate.naming.physical-strategy"));
         em.setJpaPropertyMap(properties);
 
         return em;
@@ -61,7 +49,7 @@ public class ItalyDatabaseConfiguration {
 
     @Primary
     @Bean
-    public DataSource italyDataSource() {
+    public DataSource country1DataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("spring.datasource.driverClassName"));
         dataSource.setUrl(env.getProperty("spring.datasource.url"));
@@ -73,12 +61,10 @@ public class ItalyDatabaseConfiguration {
 
     @Primary
     @Bean
-    public PlatformTransactionManager italyDatabaseTransactionManager() {
+    public PlatformTransactionManager country1DatabaseTransactionManager() {
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(italyDatabaseEntityManager().getObject());
+        transactionManager.setEntityManagerFactory(country1DatabaseEntityManager().getObject());
         return transactionManager;
     }
-
-	
 
 }

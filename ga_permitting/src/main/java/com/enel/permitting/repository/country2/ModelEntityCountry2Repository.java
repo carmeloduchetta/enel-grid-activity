@@ -1,4 +1,4 @@
-package com.enel.permitting.repository.italy;
+package com.enel.permitting.repository.country2;
 
 import java.time.LocalDate;
 //import java.sql.Date;
@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.enel.permitting.model.Fascicle;
+import com.enel.permitting.model.ModelEntity;
 
 /**
  * Repository can be used to delegate CRUD operations against the data source: http://goo.gl/P1J8QH
@@ -22,20 +22,21 @@ import com.enel.permitting.model.Fascicle;
 
 //@Repository
 //@Transactional
-public interface FascicleItalyRepository extends JpaRepository<Fascicle, Long> {	
+public interface ModelEntityCountry2Repository extends JpaRepository<ModelEntity, Long> {	
     
-    Fascicle findFascicoloByCditer(String cditer);
+    ModelEntity findFascicoloByCditer(String cditer);
     Page findAll(Pageable pageable);
-    
+
     @Procedure(name = "startSession")
     void startSession(
     		@Param("as_user") String user,
     		@Param("as_application") String application,
     		@Param("as_locale") String local    		
     );
-
+    
     @Procedure(name = "endSession")
     void endSession();
+
 
     @Procedure(name = "salvaFascicoloReale")
     HashMap<String,Object> saveFascicle(

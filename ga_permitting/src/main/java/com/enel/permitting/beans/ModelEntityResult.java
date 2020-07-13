@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_NULL)
-public class FascicleResult implements Serializable {
+public class ModelEntityResult implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -37,5 +37,4 @@ public class FascicleResult implements Serializable {
 	private String as_major_msg;
 	private String as_minor_msg;
 	
-
 }

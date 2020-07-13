@@ -1,7 +1,5 @@
 package com.enel.permitting.model;
 
-
-//import java.sql.Date;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -30,27 +28,6 @@ import lombok.Setter;
 /*
  * a simple domain entity doubling as a DTO
  */
-
-/*@SqlResultSetMappings({
-	@SqlResultSetMapping(
-			name = "getFascicleResult", 
-			classes = @ConstructorResult(
-					targetClass = FascicleResult.class, columns={
-							@ColumnResult(name="an_idfascicolo", type = Integer.class),
-							@ColumnResult(name="as_cdstatofascicolo", type = String.class),
-							@ColumnResult(name="as_cdstatosuccessivo", type = String.class),
-							@ColumnResult(name="as_cdstatoprecedente", type = String.class),
-							@ColumnResult(name="ad_dttermineprevista", type = Date.class),
-							@ColumnResult(name="as_listastati", type = String.class),
-							@ColumnResult(name="as_repaintgraph", type = String.class),
-							@ColumnResult(name="an_major_code", type = Integer.class),
-							@ColumnResult(name="an_minor_code", type = Integer.class),
-							@ColumnResult(name="as_major_msg", type = String.class),
-							@ColumnResult(name="as_minor_msg", type = String.class)
-					}
-			)
-	)
-})*/
 
 @NamedStoredProcedureQueries({
 	@NamedStoredProcedureQuery(
@@ -141,7 +118,7 @@ import lombok.Setter;
 @JsonInclude(Include.NON_NULL)
 @Entity
 @Table(name = "FASCREAL", schema = "ARDESIAI")
-public class Fascicle {
+public class ModelEntity {
 	
 		@Id
 	    @GeneratedValue()

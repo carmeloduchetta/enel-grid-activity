@@ -17,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@ComponentScan("com.enel.permitting.controller")
+@ComponentScan(ApplicationConstants.API_PACKAGE_DEFINITION)
 public class SwaggerConfig {
 
     @Bean
@@ -32,20 +32,14 @@ public class SwaggerConfig {
     
 
     private ApiInfo apiInfo() {
-        
-    	String title = "Grid Activity API";
-        String description = "<h3>General</h3>"
-	            + "<p>Permitting component, thru a set of REST calls, "
-	            + "offers the chance to manage a set of fascicles intended to enrich Enel portfolio.</p>";
-	            
+        	            
         return new ApiInfoBuilder()
-                .title(title)
-                .description(description)
+                .title(ApplicationConstants.API_DOCUMENTATION_TITLE)
+                .description(ApplicationConstants.API_DOCUMENTATION_DESCRITPTION)
                 .termsOfServiceUrl("github")
-                .license("Enel")
-                .licenseUrl("")
-                .version("1.0")
-                //.contact(new Contact("siamak"))
+                .license(ApplicationConstants.API_OWNER)
+                .licenseUrl(ApplicationConstants.API_OWNER_LICENSE_URL)
+                .version(ApplicationConstants.API_VERSION)
                 .build();
     }
 

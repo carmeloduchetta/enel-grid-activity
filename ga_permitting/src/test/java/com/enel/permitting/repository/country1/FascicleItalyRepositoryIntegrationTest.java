@@ -1,4 +1,4 @@
-package com.enel.permitting.italy.repository;
+package com.enel.permitting.repository.country1;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.enel.permitting.GaPermittingApplication;
-import com.enel.permitting.repository.italy.FascicleItalyRepository;
+import com.enel.permitting.repository.country1.ModelEntityCountry1Repository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GaPermittingApplication.class)
@@ -33,7 +33,7 @@ public class FascicleItalyRepositoryIntegrationTest {
 	DataSource datasource;
 	
     @Autowired
-    private FascicleItalyRepository fascicleRepository;
+    private ModelEntityCountry1Repository fascicleRepository;
     
     //@Test
     public void checkRegisterParameterOnDB() {

@@ -7,29 +7,29 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.enel.permitting.beans.FascicleResult;
-import com.enel.permitting.config.ApiConstants;
+import com.enel.permitting.beans.ModelEntityResult;
+import com.enel.permitting.config.ApplicationConstants;
 import com.enel.permitting.config.Country;
-import com.enel.permitting.model.Fascicle;
-import com.enel.permitting.repository.italy.FascicleItalyRepository;
-import com.enel.permitting.repository.spain.FascicleSpainRepository;
+import com.enel.permitting.model.ModelEntity;
+import com.enel.permitting.repository.country1.ModelEntityCountry1Repository;
+import com.enel.permitting.repository.country2.ModelEntityCountry2Repository;
 import com.enel.permitting.util.JSONHelper;
 
 @Service
-public class FascicleService {
+public class ModelEntityService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FascicleService.class);
-
-    @Autowired
-    private FascicleItalyRepository fascicleItalyRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ModelEntityService.class);
 
     @Autowired
-    private FascicleSpainRepository fascicleSpainRepository;
+    private ModelEntityCountry1Repository fascicleItalyRepository;
 
-    public FascicleService() {
+    @Autowired
+    private ModelEntityCountry2Repository fascicleSpainRepository;
+
+    public ModelEntityService() {
     }
     
-    public FascicleResult createFascicle(Fascicle fascicle, Country country) {
+    public ModelEntityResult createFascicle(ModelEntity fascicle, Country country) {
     	 	
     	try {
     		
@@ -56,7 +56,7 @@ public class FascicleService {
     	    	
     	    	case es:
     	    		
-    	    		fascicleSpainRepository.startSession(fascicle.getUserins(), ApiConstants.APPLICATION_INIZIALIZATION, country.name());
+    	    		fascicleSpainRepository.startSession(fascicle.getUserins(), ApplicationConstants.APPLICATION_INIZIALIZATION, country.name());
     	    		mapResult = fascicleSpainRepository.saveFascicle(
     	        			fascicle.getIdfascicolo() == null ? null : fascicle.getIdfascicolo(),fascicle.getIdente() == null ? null : fascicle.getIdente(), fascicle.getIddestinatario() == null ? null : fascicle.getIddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
     	        			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == null ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == null ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),
@@ -83,7 +83,7 @@ public class FascicleService {
     		if(mapResult != null)
     			LOGGER.info(JSONHelper.toJSONwithPrettyPrint(mapResult));
    		
-    		return JSONHelper.convertValue(mapResult, FascicleResult.class);
+    		return JSONHelper.convertValue(mapResult, ModelEntityResult.class);
     		
     	} catch(Exception ex) {
     		LOGGER.info(ex.getLocalizedMessage());
@@ -97,7 +97,7 @@ public class FascicleService {
     }
 
     
-    public Fascicle getFascicolo(Long id, Country country) {
+    public ModelEntity getFascicolo(Long id, Country country) {
     	
     	try {    	
     		

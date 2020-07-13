@@ -1,4 +1,4 @@
-package com.enel.permitting.spain.repository;
+package com.enel.permitting.repository.country2;
 
 import java.sql.Date;
 import java.util.HashMap;
@@ -18,11 +18,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.enel.permitting.GaPermittingApplication;
-import com.enel.permitting.config.country.SpainDatabaseConfiguration;
-import com.enel.permitting.repository.spain.FascicleSpainRepository;
+import com.enel.permitting.config.country.Country2DatabaseConfiguration;
+import com.enel.permitting.repository.country2.ModelEntityCountry2Repository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {GaPermittingApplication.class, SpainDatabaseConfiguration.class})//(classes = GaPermittingApplication.class)
+@SpringBootTest(classes = {GaPermittingApplication.class, Country2DatabaseConfiguration.class})//(classes = GaPermittingApplication.class)
 public class FascicleSpainRepositoryIntegrationTest {
 
 	@Autowired
@@ -33,7 +33,7 @@ public class FascicleSpainRepositoryIntegrationTest {
 	
 		
     //@Autowired
-    private FascicleSpainRepository fascicleRepository;
+    private ModelEntityCountry2Repository fascicleRepository;
     
     /*@Test
     public void checkRegisterParameterOnDB() {
