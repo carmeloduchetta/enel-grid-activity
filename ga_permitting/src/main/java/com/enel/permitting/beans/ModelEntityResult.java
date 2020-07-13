@@ -14,7 +14,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-//@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_NULL)
@@ -22,19 +21,11 @@ public class ModelEntityResult implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	//OUT
-	private Integer an_idfascicolo;
-	private String as_cdstatofascicolo;
-	private String as_cdstatosuccessivo;
-	private String as_cdstatoprecedente;
-	
+	private Integer param_out_1;
+	private String param_out_2;
+	private String param_out_3;
+		
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
-	private Date ad_dttermineprevista;
-	private String as_listastati;
-	private String as_repaintgraph;
-	private Integer an_major_code;
-	private Integer an_minor_code;
-	private String as_major_msg;
-	private String as_minor_msg;
+	private Date param_out_4;
 	
 }

@@ -4,7 +4,6 @@ package com.enel.permitting.config;
 public final class ApplicationConstants {
 
 	/** ############################# API CONSTANTS ####################################### */	
-
 	public static final String X_API_KEY = "X-API-Key";
     
 	public static final String API_OWNER = "Enel";
@@ -21,6 +20,12 @@ public final class ApplicationConstants {
     public static final String API_DOCUMENTATION_OPERATION = "Create a \"Model-Entity\" Resource";
     public static final String API_DOCUMENTATION_OPERATION_NOTES = "Returns the URL of the new resource in the Location header.";
 	public static final String API_PACKAGE_DEFINITION = "com.enel.permitting.controller";
+	
+	/** ############################# LIST STORE PROCEDURES  ####################################### */
+	
+	public static final String STORE_PROCEDURE_1 = "ARDESIAI.PCK_GEST_FASCREAL.SALVA_FASCICOLO_REALE";
+	public static final String STORE_PROCEDURE_2 = "COMMONSERVICES.P#ENVIRONMENT.STARTSESSION";
+	public static final String STORE_PROCEDURE_3 = "COMMONSERVICES.P#ENVIRONMENT.ENDSESSION";
 	
 	/** ############################# ERROR MESSAGES ####################################### */	
 	public static final String SUCCESS_MESSAGE = "Successful operation";

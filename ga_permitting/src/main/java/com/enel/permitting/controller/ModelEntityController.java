@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,26 +48,25 @@ public class ModelEntityController extends AbstractRestHandler {
                         HttpServletRequest request, HttpServletResponse response) {
   
     	ModelEntityResult createdModelEntity = modelEntityService.createFascicle(modelEntity,country);
-    	if(createdModelEntity != null && createdModelEntity.getAn_idfascicolo() != null && createdModelEntity.getAn_idfascicolo() > 0)
-    		response.setHeader("Location", request.getRequestURL().append("/").append(createdModelEntity.getAn_idfascicolo()).toString());
+    	if(createdModelEntity != null && createdModelEntity.getParam_out_1() != null && createdModelEntity.getParam_out_1() > 0)
+    		response.setHeader("Location", request.getRequestURL().append("/").append(createdModelEntity.getParam_out_1()).toString());
     	
     	return createdModelEntity;
     }
     
-    /** to delete **/
     @RequestMapping(value = "/{id}",
             method = RequestMethod.GET,
-            produces = "application/json; charset=UTF-8")
+            produces = ApplicationConstants.API_STANDARD_JSON_FORMAT)
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "Get a single fascicle.", notes = "You have to provide a valid fascicle ID.")
+    @ApiOperation(value = ApplicationConstants.API_DOCUMENTATION_OPERATION, notes = ApplicationConstants.API_DOCUMENTATION_OPERATION_NOTES)
     public
     @ResponseBody
-    ModelEntity getFascicolo(   @ApiParam(value = "Country Reference", required = true)
+    ModelEntity getFascicolo(@ApiParam(value = "Country Reference", required = true)
     						 @PathVariable("country") Country country,
     						 @ApiParam(value = "The ID of the fascicle.", required = true)
                              @PathVariable("id") Long id,
                              HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	ModelEntity fascicolo = this.modelEntityService.getFascicolo(id,country);
+    	ModelEntity fascicolo = this.modelEntityService.getModelEntity(id,country);
         checkResourceFound(fascicolo);
 
         return fascicolo;

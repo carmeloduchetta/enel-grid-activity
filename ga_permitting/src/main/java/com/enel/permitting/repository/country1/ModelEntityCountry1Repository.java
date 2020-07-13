@@ -1,18 +1,11 @@
 package com.enel.permitting.repository.country1;
 
-import java.time.LocalDate;
-//import java.sql.Date;
 import java.util.Date;
 import java.util.HashMap;
 
-import javax.transaction.Transactional;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import com.enel.permitting.model.ModelEntity;
 
@@ -20,75 +13,25 @@ import com.enel.permitting.model.ModelEntity;
  * Repository can be used to delegate CRUD operations against the data source: http://goo.gl/P1J8QH
  */
 
-//@Repository
-//@Transactional
 public interface ModelEntityCountry1Repository extends JpaRepository<ModelEntity, Long> {	
     
-    ModelEntity findFascicoloByCditer(String cditer);
-    Page findAll(Pageable pageable);
+    @Procedure(name = "ContextProcedure1")
+    HashMap<String,Object> saveModelEntity(
+    		@Param("<name_param1>") Long param1,
+    		@Param("<name_param2>") Long param2,
+    		@Param("<name_param3>") Integer param3,
+    		@Param("<name_param4>") String param4,
+    		@Param("<name_param5>") Date param5		
+    );
     
-    @Procedure(name = "startSession")
+    @Procedure(name = "ContextProcedure2")
     void startSession(
-    		@Param("as_user") String user,
-    		@Param("as_application") String application,
-    		@Param("as_locale") String local    		
+    		@Param("<name_param1>") String param1,
+    		@Param("<name_param2>") String param2,
+    		@Param("<name_param3>") String param3    		
     );
 
-    @Procedure(name = "endSession")
+    @Procedure(name = "ContextProcedure3")
     void endSession();
 
-    @Procedure(name = "salvaFascicoloReale")
-    HashMap<String,Object> saveFascicle(
-    		@Param("an_idfascicolo")       Long idfascicolo,
-    		@Param("an_idente")            Long idente,
-    		@Param("an_iddestinatario")    Long iddestinatario,
-    		
-    		@Param("as_cdfascicolo")       String cdfascicolo,
-    		@Param("as_dsfascicolo")       String dsfascicolo,
-    		@Param("as_cditer")            String cditer,
-    		@Param("as_utente")            String utente,
-    		
-    		@Param("an_idinddestinat")     Integer idinddestinat,
-    		@Param("an_idunitaresp")       Integer idunitaresp,
-    		
-    		@Param("as_cdtiporichiesta")   String cdtiporichiesta,
-    		@Param("as_cdtiporisposta")    String cdtiporisposta,
-    		
-    		@Param("an_ggterminilegge")    Integer ggterminilegge,
-    		
-    		@Param("as_swterminilegge")    String swterminilegge,
-    		
-    		@Param("an_ggtempomedio")      Integer ggtempomedio,
-    		
-    		@Param("as_cdstatoiteriniz")   String cdstatoiteriniz,
-    		@Param("as_cdstatoiterfine")   String cdstatoiterfine,
-
-    		@Param("ad_dtfirma")           Date dtfirma,
-    		@Param("ad_dtspedizione")      Date dtspedizione,
-    		@Param("ad_dtricevutaritorno") Date dtricevutaritorno,
-    			
-    		@Param("as_forzastato")        String forzastato,
-    		@Param("as_idpumaistanza")     String idpumaistanza,
-    		@Param("as_protpumaistanza")   String protpumaistanza,
-    		
-    		@Param("ad_databrevimanuist")  Date dataBreviManuIst,
-    		@Param("ad_dtinizioattesa")    Date dtinizioattesa,
-    		
-    		@Param("as_flagavanzamento")   String flagavanzamento,
-    		
-    		@Param("ad_dtrisposta")        Date dtrisposta,
-    		
-    		@Param("as_cdrispostaottenuta") String cdrispostaottenuta,
-    		@Param("as_condizioni")        String condizioni,
-    		@Param("as_cdpumarisposta")    String cdpumarisposta,
-    		@Param("an_idprofilopuma")     String idprofilopuma,
-    		
-    		@Param("ad_databrevimanurisp") Date dataBreviManuRisp,
-    		@Param("ad_dtfascfine")        Date dtfascfine,
-    		
-    		@Param("as_cdesitofasc")       String cdesitofasc,
-    		@Param("as_swprescrizione")    String swprescrizione,
-    		@Param("as_noteprescrizione")  String noteprescrizione
-    );
-    
 }
