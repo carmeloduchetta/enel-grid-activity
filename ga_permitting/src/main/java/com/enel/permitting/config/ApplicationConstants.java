@@ -1,7 +1,7 @@
 package com.enel.permitting.config;
 
 
-public final class ApiConstants {
+public final class ApplicationConstants {
 
 	public static final String X_API_KEY = "X-API-Key";
 
@@ -13,7 +13,7 @@ public final class ApiConstants {
 	public static final String INTERNAL_ERROR_MESSAGE = "Internal server error";
 
 	public static final String APPLICATION_INIZIALIZATION = "ARDESIA_ONLINE";
-	private ApiConstants() {
+	private ApplicationConstants() {
 		// Constants
 	}
 

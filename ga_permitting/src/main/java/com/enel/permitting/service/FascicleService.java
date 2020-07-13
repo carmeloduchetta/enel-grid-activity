@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enel.permitting.beans.FascicleResult;
-import com.enel.permitting.config.ApiConstants;
+import com.enel.permitting.config.ApplicationConstants;
 import com.enel.permitting.config.Country;
 import com.enel.permitting.model.Fascicle;
 import com.enel.permitting.repository.italy.FascicleItalyRepository;
@@ -56,7 +56,7 @@ public class FascicleService {
     	    	
     	    	case es:
     	    		
-    	    		fascicleSpainRepository.startSession(fascicle.getUserins(), ApiConstants.APPLICATION_INIZIALIZATION, country.name());
+    	    		fascicleSpainRepository.startSession(fascicle.getUserins(), ApplicationConstants.APPLICATION_INIZIALIZATION, country.name());
     	    		mapResult = fascicleSpainRepository.saveFascicle(
     	        			fascicle.getIdfascicolo() == null ? null : fascicle.getIdfascicolo(),fascicle.getIdente() == null ? null : fascicle.getIdente(), fascicle.getIddestinatario() == null ? null : fascicle.getIddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
     	        			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == null ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == null ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),
