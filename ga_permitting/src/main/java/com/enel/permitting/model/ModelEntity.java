@@ -44,7 +44,6 @@ import lombok.Setter;
 				@StoredProcedureParameter(mode = ParameterMode.OUT, type = Date.class, name = "<name_param7>"),
 				@StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "<name_param8>"),
 				@StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "<name_param9>")		
-
 			}
 		),
 		@NamedStoredProcedureQuery(

@@ -29,7 +29,7 @@ public class ModelEntityService {
     public ModelEntityService() {
     }
     
-    public ModelEntityResult createFascicle(ModelEntity modelEntity, Country country) {
+    public ModelEntityResult createModelEntity(ModelEntity modelEntity, Country country) {
     	 	
     	try {
     		
@@ -73,30 +73,6 @@ public class ModelEntityService {
     		return null;
     	}
     	 	
-    }
-
-
-    public ModelEntity getModelEntity(Long id, Country country) {
-    	
-    	try {    	
-    		
-    		Country currentCountry = Country.fromName(country.name());
-
-    	    switch(currentCountry){
-    	    
-    	    	case country1:
-    	    		return modelEntityCountry1Repository.findById(id).get();
-    	    	case country2:
-    	    		return modelEntityCountry2Repository.findById(id).get();
-    	    	
-    	    	default: 
-    	    		return null;    		    	    	
-    	    }
-    	    
-    	}catch(Exception ex) {
-    		ex.getStackTrace();
-    		return null;
-    	}
     }
 
 }

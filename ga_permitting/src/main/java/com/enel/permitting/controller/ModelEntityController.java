@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiParam;
 
 
 @RestController
-@RequestMapping(value = "/permitting/{country}/modelEntity")
+@RequestMapping(value = ApplicationConstants.BASE_BUSINESS_PROCESS_URL+"/{country}/modelEntity")
 @Api(tags = {ApplicationConstants.API_DOCUMENTATION_TAGS})
 public class ModelEntityController extends AbstractRestHandler {
 
@@ -47,30 +47,11 @@ public class ModelEntityController extends AbstractRestHandler {
     					@PathVariable("country") Country country, @RequestBody ModelEntity modelEntity,
                         HttpServletRequest request, HttpServletResponse response) {
   
-    	ModelEntityResult createdModelEntity = modelEntityService.createFascicle(modelEntity,country);
+    	ModelEntityResult createdModelEntity = modelEntityService.createModelEntity(modelEntity,country);
     	if(createdModelEntity != null && createdModelEntity.getParam_out_1() != null && createdModelEntity.getParam_out_1() > 0)
     		response.setHeader("Location", request.getRequestURL().append("/").append(createdModelEntity.getParam_out_1()).toString());
     	
     	return createdModelEntity;
     }
-    
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.GET,
-            produces = ApplicationConstants.API_STANDARD_JSON_FORMAT)
-    @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = ApplicationConstants.API_DOCUMENTATION_OPERATION, notes = ApplicationConstants.API_DOCUMENTATION_OPERATION_NOTES)
-    public
-    @ResponseBody
-    ModelEntity getFascicolo(@ApiParam(value = "Country Reference", required = true)
-    						 @PathVariable("country") Country country,
-    						 @ApiParam(value = "The ID of the fascicle.", required = true)
-                             @PathVariable("id") Long id,
-                             HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	ModelEntity fascicolo = this.modelEntityService.getModelEntity(id,country);
-        checkResourceFound(fascicolo);
-
-        return fascicolo;
-    }
-
    
 }

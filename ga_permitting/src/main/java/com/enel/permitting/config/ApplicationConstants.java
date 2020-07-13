@@ -9,7 +9,7 @@ public final class ApplicationConstants {
 	public static final String API_OWNER = "Enel";
 	public static final String API_OWNER_LICENSE_URL="";
 	public static final String API_VERSION = "1.0";
-	private static final String BASE_URL = "/v" + API_VERSION;
+	public static final String BASE_BUSINESS_PROCESS_URL = "/permitting";
 
 	public static final String API_DOCUMENTATION_TITLE = "Grid Activity API";
 	public static final String API_DOCUMENTATION_DESCRITPTION = "<h3>General</h3>"
