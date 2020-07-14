@@ -1,18 +1,13 @@
 package com.enel.permitting.repository.italy;
 
-import java.time.LocalDate;
-//import java.sql.Date;
 import java.util.Date;
 import java.util.HashMap;
-
-import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import com.enel.permitting.model.Fascicle;
 
@@ -20,8 +15,6 @@ import com.enel.permitting.model.Fascicle;
  * Repository can be used to delegate CRUD operations against the data source: http://goo.gl/P1J8QH
  */
 
-//@Repository
-//@Transactional
 public interface FascicleItalyRepository extends JpaRepository<Fascicle, Long> {	
     
     Fascicle findFascicoloByCditer(String cditer);

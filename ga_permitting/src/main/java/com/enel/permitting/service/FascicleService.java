@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.enel.permitting.beans.FascicleResult;
 import com.enel.permitting.config.ApplicationConstants;
@@ -29,20 +30,21 @@ public class FascicleService {
     public FascicleService() {
     }
     
+    @Transactional
     public FascicleResult createFascicle(Fascicle fascicle, Country country) {
     	 	
+    	Country currentCountry = Country.fromName(country.name());
+    	
     	try {
     		
         	LOGGER.info(JSONHelper.toJSONwithPrettyPrint(fascicle));
         	HashMap<String,Object> mapResult = null;
-        	
-        	Country currentCountry = Country.fromName(country.name());
 
     	    switch(currentCountry){
     	    
     	    	case it:
     	    		
-    	    		//fascicleItalyRepository.startSession(fascicle.userins(), ApiConstants.APPLICATION_INIZIALIZATION, country.name());
+    	    		fascicleItalyRepository.startSession(fascicle.getUserins(), ApplicationConstants.APPLICATION_INIZIALIZATION, country.name());
     	    		mapResult = fascicleItalyRepository.saveFascicle(
     	        			fascicle.getIdfascicolo() == null ? null : fascicle.getIdfascicolo(),fascicle.getIdente() == null ? null : fascicle.getIdente(), fascicle.getIddestinatario() == null ? null : fascicle.getIddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
     	        			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == null ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == null ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),
@@ -51,7 +53,7 @@ public class FascicleService {
     	        			fascicle.getIdpumaistanza(), fascicle.getProtpumaistanza(), fascicle.getDtbrevimanuist(), fascicle.getDtinizioattesa(),null,
     	        			fascicle.getDtrisposta(), fascicle.getCdrispostaottenuta(), null, fascicle.getCdpumarisposta(), fascicle.getIdprofilopuma(),
     	        			fascicle.getDtbrevimanurisp(), fascicle.getDtfascfine(), fascicle.getCdesitofasc(), fascicle.getSwprescrizione(),fascicle.getNoteprescrizione());
-    	    		//fascicleItalyRepository.endSession();
+    	    		fascicleItalyRepository.endSession();
     	    		break;
     	    	
     	    	case es:
@@ -89,6 +91,16 @@ public class FascicleService {
     		LOGGER.info(ex.getLocalizedMessage());
     		LOGGER.info(ex.getMessage());
     		LOGGER.info(ex.getCause().toString());
+    		switch(currentCountry){
+	    		case it:
+	    			fascicleItalyRepository.endSession();
+	    			break;
+	    		case es:
+	    			fascicleSpainRepository.endSession();
+	    			break;
+    			default:
+    				break;
+    		}
     		//return new RestErrorInfo(ex, "Sorry I couldn't find it.");
     		ex.getStackTrace();
     		return null;
