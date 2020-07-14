@@ -21,10 +21,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.enel.GaBusinessProcessApplication;
 import com.enel.config.ApplicationConstants;
 import com.enel.config.country.Country2DatabaseConfiguration;
-import com.enel.repository.country2.ModelEntityCountry2Repository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {GaBusinessProcessApplication.class, Country2DatabaseConfiguration.class})//(classes = GaPermittingApplication.class)
+@SpringBootTest(classes = {GaBusinessProcessApplication.class, Country2DatabaseConfiguration.class})
 public class ModelEntityCountry2RepositoryIntegrationTest {
 
 	@PersistenceContext
