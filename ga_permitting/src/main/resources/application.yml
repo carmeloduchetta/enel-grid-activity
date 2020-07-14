@@ -1,0 +1,48 @@
+spring.jmx:
+   enabled: false
+
+spring:
+  jpa:
+    database-platform: 
+    database: ORACLE
+    show-sql: true
+    hibernate:
+      ddl-auto: 
+    properties:
+      hibernate:
+        proc.param_null_passing: true
+
+### These "datasource" properties are the references for Country1 on the code
+  datasource:
+    url: 
+    username: 
+    password: 
+    driverClassName: 
+    
+  country2:
+    datasource:
+      url: 
+      username: 
+      password: 
+      driverClassName: 
+
+server:
+  port: 8090
+
+#todo: make sure to always enable security in production
+security:
+  basic:
+    enabled: false
+
+#management endpoints on a separate port
+management:
+  port: 8091
+  security:
+    enabled: false # management port is internal only. no need to secure it.
+
+#default project info followed by actual injected pom-specified values.
+project:
+  name: ga<business process>
+  version: 1.0
+  description: 
+ 
