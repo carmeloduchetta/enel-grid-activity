@@ -31,7 +31,7 @@ public class Country1DatabaseConfiguration {
     public LocalContainerEntityManagerFactoryBean country1DatabaseEntityManager() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(country1DataSource());
-        em.setPackagesToScan("com.enel.permitting.model");
+        em.setPackagesToScan("com.enel.model");
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
