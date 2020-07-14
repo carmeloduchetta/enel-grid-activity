@@ -18,13 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.enel.GaPermittingApplication;
+import com.enel.GaBusinessProcessApplication;
 import com.enel.config.ApplicationConstants;
 import com.enel.config.country.Country2DatabaseConfiguration;
 import com.enel.repository.country2.ModelEntityCountry2Repository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {GaPermittingApplication.class, Country2DatabaseConfiguration.class})//(classes = GaPermittingApplication.class)
+@SpringBootTest(classes = {GaBusinessProcessApplication.class, Country2DatabaseConfiguration.class})//(classes = GaPermittingApplication.class)
 public class ModelEntityCountry2RepositoryIntegrationTest {
 
 	@PersistenceContext

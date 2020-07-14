@@ -5,12 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
-public class GaPermittingApplication {
+public class GaBusinessProcessApplication {
 
-    private static final Class<GaPermittingApplication> applicationClass = GaPermittingApplication.class;
+    private static final Class<GaBusinessProcessApplication> applicationClass = GaBusinessProcessApplication.class;
 
 	public static void main(String[] args) {
-		SpringApplication.run(GaPermittingApplication.class, args);
+		SpringApplication.run(GaBusinessProcessApplication.class, args);
 	}
 	
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

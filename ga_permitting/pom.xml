@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.enel</groupId>
-	<artifactId>ga_permitting</artifactId>
+	<artifactId>ga_businessprocess</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ga_permitting</name>
+	<name>ga_businessprocess</name>
 	<description>Gridactivity project for Spring Boot</description>
 	<packaging>war</packaging>
 
@@ -20,7 +20,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<start-class>com.enel.ga_permitting.GaPermittingApplication</start-class>
+		<start-class>com.enel.GaBusinessProcessApplication</start-class>
 	</properties>
 
 	<dependencies>
