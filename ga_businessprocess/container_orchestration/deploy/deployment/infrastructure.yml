@@ -1,0 +1,88 @@
+apiVersion: apps/vn
+kind: Deployment
+metadata:
+  name: ModelEntity
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: modelEntity
+  template:
+    metadata:
+      labels:
+        app: modelEntity
+    spec:
+      containers:
+      - name: modelEntity
+        image: 
+        envFrom:
+          - configMapRef:
+             name: application-properties-modelEntity
+        env:
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: 
+                key: 
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: 
+                key:
+          - name: ENV
+            value: ${deploy.env}
+          - name: CREATION_TIMESTAMP
+            value: ${deploy.creation_timestamp}
+          - name: TEST
+            value: ${testendpoint}
+        ports:
+        - containerPort: 
+          protocol: 
+        resources:
+          requests:
+            memory: "x.xGi"
+            cpu: "y.y"
+          limits:
+            memory: "x.xGi"
+            cpu: "y.y"
+---
+##You can remove the annotations if you want a public ip
+apiVersion: v1
+kind: Service
+metadata:
+   name: modelEntity
+   labels:
+      app: modelEntity
+   annotations:
+      service.beta.kubernetes.io/aws-load-balancer-internal: 
+      service.beta.kubernetes.io/aws-load-balancer-extra-security-groups: 
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: 
+spec:
+   selector:
+      app: modelEntity
+   ports:
+    - port: 
+      targetPort: 
+      protocol: 
+   type: 
+---
+apiVersion: vn
+kind: ConfigMap
+metadata:
+    name: application-properties-modelEntity
+data:
+    spring.jpa.database: ${spring_jpa_database}
+    spring.jpa.database-platform: ${spring_jpa_database_platform}
+    spring.jpa.properties.hibernate.type: ${spring_jpa_properties_hibernate_type}
+    spring.jpa.properties.hibernate.jdbc.time_zone: ${spring_jpa_properties_hibernate_jdbc_time_zone}
+    spring.jpa.properties.hibernate.proc.param_null_passing: "${spring_jpa_properties_hibernate_proc_param_null_passing}"
+    spring.jpa.hibernate.ddl-auto: ${spring_jpa_hibernate_ddl_auto}
+    spring.jpa.show-sql: "${spring_jpa_show_sql}"
+    spring.datasource.url: ${spring_datasource_url}
+    spring.datasource.username: ${spring_datasource_username}
+    spring.datasource.password: ${spring_datasource_password}
+    spring.datasource.driverClassName: ${spring_datasource_driverClassName}
+  
+   
+    
+    

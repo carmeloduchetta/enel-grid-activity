@@ -1,0 +1,16 @@
+{
+	"release_version": "1.0",
+	"cluster_installation_type": "eks",
+	"build": {
+		"custom_image": false,
+		"custom_image_version": "1.0"
+	},
+	"pre_deploy": {
+		"custom_image": false,
+		"custom_image_version": "1.0"
+	},
+	"post_deploy": {
+		"custom_image": false,
+		"custom_image_version": "1.0"
+	}
+}

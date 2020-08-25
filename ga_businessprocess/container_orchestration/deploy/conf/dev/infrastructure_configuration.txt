@@ -1,0 +1,12 @@
+spring_jpa_database_platform=
+spring_jpa_database=
+spring_jpa_show_sql= true
+spring_jpa_hibernate_ddl_auto=update
+spring_jpa_properties_hibernate_proc_param_null_passing= true
+spring_jpa_properties_hibernate_jdbc_time_zone=UTC
+spring_datasource_url=
+spring_datasource_username=
+spring_datasource_password=
+spring_datasource_driverClassName=
+spring_jpa_properties_hibernate_type=trace
+

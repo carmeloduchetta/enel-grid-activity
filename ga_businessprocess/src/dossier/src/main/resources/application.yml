@@ -1,0 +1,50 @@
+### This is the main way to configure the application (other than annotations).
+### This file is in Yaml format but you can also configure spring boot using the traditional
+### Java properties file format. 
+
+spring.jmx:
+   enabled: false
+spring:
+  jpa:
+    database-platform: 
+    database:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        proc.param_null_passing: true
+        jdbc:
+          time_zone: UTC
+          
+#  jackson:      
+#    deserialization:
+#     fail-on-unknown-properties: true
+
+  datasource:
+    url: endpoint
+    username: user
+    password: pw
+    driverClassName: driver
+
+
+server:
+  port: 
+
+#todo: make sure to always enable security in production
+security:
+  basic:
+    enabled: false
+
+#management endpoints on a separate port
+management:
+  port: 
+  security:
+    enabled: false # management port is internal only. no need to secure it.
+
+#default project info followed by actual injected pom-specified values.
+project:
+  name: gabusinessprocess
+  version: 
+  description: 
+ 
