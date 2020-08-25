@@ -26,7 +26,7 @@ public class ModelEntityResponse implements Serializable {
 	private String message;	
 	private String details;
 	
-	//@ApiModelProperty(notes = "Additional response data set", required = true)
+	// @ApiModelProperty(notes = "Additional response data set", required = true)
 	private Map<String, String> additionalResponseData;
 		
 }
