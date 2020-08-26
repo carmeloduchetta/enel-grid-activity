@@ -80,7 +80,7 @@ public class ModelEntity implements Serializable {
 	private String column_2;
     
 	@Column()
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="CET")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="UTC")
 	private Date column_3;
 
     @Column()

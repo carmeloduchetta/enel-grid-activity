@@ -4,6 +4,8 @@ package com.enel.repository;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -40,6 +42,8 @@ public interface ModelEntityRepository extends JpaRepository<ModelEntity, IdMode
 
     @Transactional
 	Long deleteModelEntityByIdModelEntity(Long idModelEntity);
+    
+    Page<ModelEntity> findModelEntityByColumn2AndCountry(String column_2,String country, Pageable pageable);
 
 }
 

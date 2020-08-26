@@ -10,6 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.enel.beans.ModelEntityResponse;
@@ -231,6 +234,14 @@ public class ModelEntityService implements IModelEntityService {
     		return getModelEntityResponse(ModelEntityStatus.STATUS_8.getCode(),"ModelEntity not found",null,null);
     	}	 
 
+    }
+    
+  public Page<ModelEntity> getPaginationModelEntity(String column_2, Country country, Integer pageNumber, Integer pageSize){
+    	
+    	LOGGER.info("Country: "+country.name());   	
+    	return modelEntityRepository.findModelEntityByColumn2AndCountry(column_2, 
+    			country.name().toUpperCase(), PageRequest.of(pageNumber,pageSize, Sort.by("idModelEntity").descending()));
+    
     }
 
 }

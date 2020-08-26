@@ -20,6 +20,8 @@ public final class ApplicationConstants {
     public static final String API_DOCUMENTATION_OPERATION = "Create a \"Model Entity\" Resource";
     public static final String API_DOCUMENTATION_OPERATION_NOTES = "Returns the URL of the new resource in the Location header.";
 	public static final String API_PACKAGE_DEFINITION = "com.enel.controller";
+	public static final String API_PAGE_NUMBER_DEFAULT = "0";
+	public static final String API_PAGE_SIZE_DEFAULT = "10";
 	
 	
 	/** ############################# DOSSIER DB SEQUENCE PARAMS ####################################### */

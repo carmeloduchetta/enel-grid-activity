@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -87,6 +88,22 @@ public class ModelEntityController extends AbstractRestHandler {
     	return new ResponseEntity<ModelEntityResponse>(modelEntityResponse,status);
     }
     
+    @RequestMapping(value = "",
+            method = RequestMethod.GET,
+            produces = ApplicationConstants.API_STANDARD_JSON_FORMAT)
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Get a list of all ModelEntity.", notes = "")
+    public @ResponseBody Page<ModelEntity> getModelEntityByCountry(
+    		@ApiParam(value = "COUNTRY", required = true, type = "Country")
+    		@PathVariable("country") Country country, 
+    		@RequestParam(value = "COLUMN2", required = false)  String column_2,
+    		@RequestParam(value = "PAGENUMBER", required = false, defaultValue = ApplicationConstants.API_PAGE_NUMBER_DEFAULT) Integer pageNumber,
+    		@RequestParam(value = "PAGESIZE", required = false, defaultValue = ApplicationConstants.API_PAGE_SIZE_DEFAULT) Integer pageSize,
+    		HttpServletRequest request, HttpServletResponse response){
+    	
+    	return modelEntityService.getPaginationModelEntity(column_2,country, pageNumber, pageSize);
+
+    }
     
     @RequestMapping(value = "/{id}",
     		method = RequestMethod.PUT,
