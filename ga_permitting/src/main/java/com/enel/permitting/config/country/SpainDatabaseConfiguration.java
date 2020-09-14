@@ -35,11 +35,19 @@ public class SpainDatabaseConfiguration {
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         final HashMap<String, Object> properties = new HashMap<String, Object>();
-        properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
-        properties.put("hibernate.dialect", env.getProperty("spring.jpa.database-platform"));
-        properties.put("hibernate.database", env.getProperty("spring.jpa.database"));
-        properties.put("hibernate.proc.param_null_passing", env.getProperty("spring.jpa.properties.hibernate.proc.param_null_passing"));
-        properties.put("hibernate.show_sql", env.getProperty("spring.jpa.properties.hibernate.show_sql"));
+        
+        System.out.println("SPAIN#####################"+env.getProperty("spring.spain.jpa.hibernate.ddl-auto"));
+        System.out.println("SPAIN#####################"+env.getProperty("spring.spain.jpa.database-platform"));
+        System.out.println("SPAIN#####################"+env.getProperty("spring.spain.jpa.database"));
+        System.out.println("SPAIN#####################"+env.getProperty("spring.spain.jpa.show-sql"));
+        System.out.println("SPAIN#####################"+env.getProperty("spring.spain.jpa.hibernate.ddl-auto"));
+
+        
+        properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.spain.jpa.hibernate.ddl-auto"));
+        properties.put("hibernate.dialect", env.getProperty("spring.spain.jpa.database-platform"));
+        properties.put("hibernate.database", env.getProperty("spring.spain.jpa.database"));
+        properties.put("hibernate.proc.param_null_passing", env.getProperty("spring.spain.jpa.properties.hibernate.proc.param_null_passing"));
+        properties.put("hibernate.show_sql", env.getProperty("spring.spain.jpa.properties.hibernate.show_sql"));
         
         //properties.put("hibernate.jdbc.batch_size", env.getProperty("spring.jpa.properties.hibernate.jdbc.batch_size"));
         //properties.put("hibernate.order_inserts", env.getProperty("spring.jpa.properties.hibernate.order_inserts"));
@@ -60,6 +68,11 @@ public class SpainDatabaseConfiguration {
 
     @Bean
     public DataSource spainDataSource() {
+        
+    	System.out.println("SPAIN#####################"+env.getProperty("spring.spain.datasource.url"));
+        System.out.println("SPAIN#####################"+env.getProperty("spring.spain.datasource.username"));
+        System.out.println("SPAIN#####################"+env.getProperty("spring.spain.datasource.password"));
+ 
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("spring.spain.datasource.driverClassName"));
         dataSource.setUrl(env.getProperty("spring.spain.datasource.url"));

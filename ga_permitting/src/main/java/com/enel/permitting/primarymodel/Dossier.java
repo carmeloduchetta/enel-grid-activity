@@ -62,7 +62,7 @@ public class Dossier implements Serializable {
         @Parameter(name = "increment_size", value = ApplicationConstants.DOSSIER_SEQUENCE_INCREMENT_SIZE)
         }
     )
-	@Column(name="id_fascicolo", insertable=true, updatable=true, unique=false, nullable=false)
+	@Column(insertable=true, updatable=true, unique=false, nullable=false)
 	private Long idFascicolo;
 
 	@Id

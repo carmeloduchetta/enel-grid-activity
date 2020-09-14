@@ -6,6 +6,8 @@ import javax.sql.DataSource;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
+import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -16,10 +18,9 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement
+//@EnableTransactionManagement
 @EnableJpaRepositories(
 		basePackages = {"com.enel.permitting.repository.primary"},
 		entityManagerFactoryRef = "primaryDatabaseEntityManager", 
@@ -43,24 +44,27 @@ public class PrimaryDatabaseConfiguration {
         em.setJpaVendorAdapter(vendorAdapter);
         final HashMap<String, Object> properties = new HashMap<String, Object>();
         
-        System.out.println("#####################"+env.getProperty("spring.primary.hibernate.ddl-auto"));
-        System.out.println("#####################"+env.getProperty("spring.primary.database-platform"));
-        System.out.println("#####################"+env.getProperty("spring.primary.database"));
-        System.out.println("#####################"+env.getProperty("spring.primary.show-sql"));
-        System.out.println("#####################"+env.getProperty("spring.primary.hibernate.ddl-auto"));
+        System.out.println("PRIMARY#####################"+env.getProperty("spring.jpa.hibernate.ddl-auto"));
+        System.out.println("PRIMARY#####################"+env.getProperty("spring.jpa.database-platform"));
+        System.out.println("PRIMARY#####################"+env.getProperty("spring.jpa.database"));
+        System.out.println("PRIMARY#####################"+env.getProperty("spring.jpa.show-sql"));
+        System.out.println("PRIMARY#####################"+env.getProperty("spring.jpa.hibernate.ddl-auto"));
+        System.out.println("PRIMARY#####################"+env.getProperty("spring.jpa.hibernate.naming.physical-strategy"));
         
-        properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.primary.hibernate.ddl-auto"));
-        properties.put("hibernate.dialect", env.getProperty("spring.primary.database-platform"));
-        properties.put("hibernate.database", env.getProperty("spring.primary.database"));
-        properties.put("hibernate.ddl-auto", env.getProperty("spring.primary.hibernate.ddl-auto"));
+        properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
+        properties.put("hibernate.dialect", env.getProperty("spring.jpa.database-platform"));
+        properties.put("hibernate.database", env.getProperty("spring.jpa.database"));
+        properties.put("hibernate.ddl-auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
         //properties.put("hibernate.proc.param_null_passing", env.getProperty("spring.primary.jpa.properties.hibernate.proc.param_null_passing"));
         //properties.put("hibernate.jdbc.lob.non_contextual_creation", env.getProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation"));
-        properties.put("show-sql", env.getProperty("spring.primary.show-sql"));
+        properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
         
+        properties.put("hibernate.physical_naming_strategy", SpringPhysicalNamingStrategy.class.getName());
+        properties.put("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName());
+
         //properties.put("hibernate.naming.implicit-strategy", env.getProperty("spring.jpa.hibernate.naming.implicit-strategy"));
         //properties.put("hibernate.naming.physical-strategy", env.getProperty("spring.jpa.hibernate.naming.physical-strategy"));
-        
-        
+                
         //properties.put("hibernate.jdbc.batch_size", env.getProperty("spring.jpa.properties.hibernate.jdbc.batch_size"));
         //properties.put("hibernate.order_inserts", env.getProperty("spring.jpa.properties.hibernate.order_inserts"));
         //properties.put("hibernate.order_updates", env.getProperty("spring.jpa.properties.hibernate.order_updates"));
@@ -81,17 +85,18 @@ public class PrimaryDatabaseConfiguration {
     @Primary
     @Bean
     public DataSource primaryDataSource() {
-        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        
-        System.out.println("#####################"+env.getProperty("spring.primary.datasource.url"));
-        System.out.println("#####################"+env.getProperty("spring.primary.datasource.username"));
-        System.out.println("#####################"+env.getProperty("spring.primary.datasource.password"));
-        
-        dataSource.setDriverClassName(env.getProperty("spring.primary.datasource.driverClassName"));
-        dataSource.setUrl(env.getProperty("spring.primary.datasource.url"));
-        dataSource.setUsername(env.getProperty("spring.primary.datasource.username"));
-        dataSource.setPassword(env.getProperty("spring.primary.datasource.password"));
 
+        System.out.println("PRIMARY#####################"+env.getProperty("spring.datasource.driverClassName"));
+        System.out.println("PRIMARY#####################"+env.getProperty("spring.datasource.url"));
+        System.out.println("PRIMARY#####################"+env.getProperty("spring.datasource.username"));
+        System.out.println("PRIMARY#####################"+env.getProperty("spring.datasource.password"));
+  
+        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getProperty("spring.datasource.driverClassName"));
+        dataSource.setUrl(env.getProperty("spring.datasource.url"));
+        dataSource.setUsername(env.getProperty("spring.datasource.username"));
+        dataSource.setPassword(env.getProperty("spring.datasource.password"));
+        
         return dataSource;
     }
 
