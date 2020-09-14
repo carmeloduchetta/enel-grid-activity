@@ -16,33 +16,50 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.enel.permitting.repository.italy",
-entityManagerFactoryRef = "italyDatabaseEntityManager", transactionManagerRef = "italyDatabaseTransactionManager")
-public class ItalyDatabaseConfiguration {
+@EnableTransactionManagement
+@EnableJpaRepositories(
+		basePackages = {"com.enel.permitting.repository.primary"},
+		entityManagerFactoryRef = "primaryDatabaseEntityManager", 
+		transactionManagerRef = "primaryDatabaseTransactionManager")
+public class PrimaryDatabaseConfiguration {
 	
 	@Autowired
 	Environment env;
 
-	public ItalyDatabaseConfiguration() {super();}
+	public PrimaryDatabaseConfiguration() {super();}
 	
-	//@Primary
+	@Primary
     @Bean
-    public LocalContainerEntityManagerFactoryBean italyDatabaseEntityManager() {
+    public LocalContainerEntityManagerFactoryBean primaryDatabaseEntityManager() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(italyDataSource());
-        em.setPackagesToScan("com.enel.permitting.model");
+        em.setDataSource(primaryDataSource());
+        em.setPackagesToScan("com.enel.permitting.primarymodel");
         em.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        em.setPersistenceUnitName("italy");
+        em.setPersistenceUnitName("primary");
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         final HashMap<String, Object> properties = new HashMap<String, Object>();
-        properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
-        properties.put("hibernate.dialect", env.getProperty("spring.jpa.database-platform"));
-        properties.put("hibernate.database", env.getProperty("spring.jpa.database"));
-        properties.put("hibernate.proc.param_null_passing", env.getProperty("spring.jpa.properties.hibernate.proc.param_null_passing"));
-        properties.put("hibernate.show_sql", env.getProperty("spring.jpa.properties.hibernate.show_sql"));
+        
+        System.out.println("#####################"+env.getProperty("spring.primary.hibernate.ddl-auto"));
+        System.out.println("#####################"+env.getProperty("spring.primary.database-platform"));
+        System.out.println("#####################"+env.getProperty("spring.primary.database"));
+        System.out.println("#####################"+env.getProperty("spring.primary.show-sql"));
+        System.out.println("#####################"+env.getProperty("spring.primary.hibernate.ddl-auto"));
+        
+        properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.primary.hibernate.ddl-auto"));
+        properties.put("hibernate.dialect", env.getProperty("spring.primary.database-platform"));
+        properties.put("hibernate.database", env.getProperty("spring.primary.database"));
+        properties.put("hibernate.ddl-auto", env.getProperty("spring.primary.hibernate.ddl-auto"));
+        //properties.put("hibernate.proc.param_null_passing", env.getProperty("spring.primary.jpa.properties.hibernate.proc.param_null_passing"));
+        //properties.put("hibernate.jdbc.lob.non_contextual_creation", env.getProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation"));
+        properties.put("show-sql", env.getProperty("spring.primary.show-sql"));
+        
+        //properties.put("hibernate.naming.implicit-strategy", env.getProperty("spring.jpa.hibernate.naming.implicit-strategy"));
+        //properties.put("hibernate.naming.physical-strategy", env.getProperty("spring.jpa.hibernate.naming.physical-strategy"));
+        
         
         //properties.put("hibernate.jdbc.batch_size", env.getProperty("spring.jpa.properties.hibernate.jdbc.batch_size"));
         //properties.put("hibernate.order_inserts", env.getProperty("spring.jpa.properties.hibernate.order_inserts"));
@@ -61,23 +78,28 @@ public class ItalyDatabaseConfiguration {
         return em;
     }
 
-    //@Primary
+    @Primary
     @Bean
-    public DataSource italyDataSource() {
+    public DataSource primaryDataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("spring.datasource.driverClassName"));
-        dataSource.setUrl(env.getProperty("spring.datasource.url"));
-        dataSource.setUsername(env.getProperty("spring.datasource.username"));
-        dataSource.setPassword(env.getProperty("spring.datasource.password"));
+        
+        System.out.println("#####################"+env.getProperty("spring.primary.datasource.url"));
+        System.out.println("#####################"+env.getProperty("spring.primary.datasource.username"));
+        System.out.println("#####################"+env.getProperty("spring.primary.datasource.password"));
+        
+        dataSource.setDriverClassName(env.getProperty("spring.primary.datasource.driverClassName"));
+        dataSource.setUrl(env.getProperty("spring.primary.datasource.url"));
+        dataSource.setUsername(env.getProperty("spring.primary.datasource.username"));
+        dataSource.setPassword(env.getProperty("spring.primary.datasource.password"));
 
         return dataSource;
     }
 
-    //@Primary
+    @Primary
     @Bean
-    public PlatformTransactionManager italyDatabaseTransactionManager() {
+    public PlatformTransactionManager primaryDatabaseTransactionManager() {
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(italyDatabaseEntityManager().getObject());
+        transactionManager.setEntityManagerFactory(primaryDatabaseEntityManager().getObject());
         return transactionManager;
     }
 

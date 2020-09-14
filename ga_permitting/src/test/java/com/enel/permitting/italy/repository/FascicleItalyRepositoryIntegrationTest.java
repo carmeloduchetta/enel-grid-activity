@@ -98,7 +98,7 @@ public class FascicleItalyRepositoryIntegrationTest {
     }
 
     
-    @Test 
+    //@Test 
     public void saveFascicleByProcedureTestByEM() {
     	
     	StoredProcedureQuery query = entityManager

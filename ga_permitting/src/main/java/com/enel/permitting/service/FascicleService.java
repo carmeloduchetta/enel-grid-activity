@@ -44,7 +44,7 @@ public class FascicleService {
     	    
     	    	case it:
     	    		
-    	    		fascicleItalyRepository.startSession(fascicle.getUserins(), ApplicationConstants.APPLICATION_INIZIALIZATION, country.name());
+    	    		fascicleItalyRepository.startSession(fascicle.getUserins(), ApplicationConstants.LEGACY_APPLICATION_INIZIALIZATION, country.name());
     	    		mapResult = fascicleItalyRepository.saveFascicle(
     	        			fascicle.getIdfascicolo() == null ? null : fascicle.getIdfascicolo(),fascicle.getIdente() == null ? null : fascicle.getIdente(), fascicle.getIddestinatario() == null ? null : fascicle.getIddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
     	        			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == null ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == null ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),
@@ -58,7 +58,7 @@ public class FascicleService {
     	    	
     	    	case es:
     	    		
-    	    		fascicleSpainRepository.startSession(fascicle.getUserins(), ApplicationConstants.APPLICATION_INIZIALIZATION, country.name());
+    	    		fascicleSpainRepository.startSession(fascicle.getUserins(), ApplicationConstants.LEGACY_APPLICATION_INIZIALIZATION, country.name());
     	    		mapResult = fascicleSpainRepository.saveFascicle(
     	        			fascicle.getIdfascicolo() == null ? null : fascicle.getIdfascicolo(),fascicle.getIdente() == null ? null : fascicle.getIdente(), fascicle.getIddestinatario() == null ? null : fascicle.getIddestinatario(),fascicle.getCdfascicolo(),fascicle.getDsfascicolo(),
     	        			fascicle.getCditer(), fascicle.getUserins(), fascicle.getIdinddestinat() == null ? null : fascicle.getIdinddestinat(), fascicle.getIdunitaresp() == null ? null : fascicle.getIdunitaresp(), fascicle.getCdtiporichiesta(),
